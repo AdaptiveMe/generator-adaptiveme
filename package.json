@@ -31,7 +31,10 @@
     "type": "git",
     "url": "https://github.com/AdaptiveMe"
   },
-  "dependencies": {},
+  "dependencies": {
+    "yeoman-generator": "^0.18.9",
+    "chalk": "^0.5.1"
+  },
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.4.0"
