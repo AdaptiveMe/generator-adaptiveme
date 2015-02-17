@@ -1,0 +1,11 @@
+{
+  "name": "<%= appname %>",
+  "description": "Description for <%= appname %>",
+  "version": "0.0.0",
+  "appPath": "src",
+  "dependencies": {
+    "adaptiveme": "<%= adaptive_version %>"
+  },
+  "devDependencies": {
+  }
+}

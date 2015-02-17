@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="i18n-config">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="default" maxOccurs="1" minOccurs="1">
+                    <xs:complexType>
+                        <xs:attribute type="language" name="language" use="required"/>
+                        <xs:attribute type="country" name="country" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="supportedLanguages">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="supportedLanguage" maxOccurs="unbounded" minOccurs="1">
+                                <xs:complexType>
+                                    <xs:attribute type="language" name="language" use="required"/>
+                                    <xs:attribute type="country" name="country" use="required"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    
+    <xs:simpleType name="language">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-z][a-z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="country">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[A-Z][A-Z]"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
