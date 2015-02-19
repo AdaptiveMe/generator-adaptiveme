@@ -1,6 +1,6 @@
 {
   "name": "generator-adaptiveme",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "AdaptiveMe Runtime Platform (ARP) app generator.",
   "keywords": [
     "yeoman-generator",
