@@ -1,6 +1,6 @@
 {
   "name": "generator-adaptiveme",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "AdaptiveMe Runtime Platform (ARP) app generator.",
   "keywords": [
     "yeoman-generator",
@@ -11,11 +11,8 @@
     "desktop",
     "framework"
   ],
-  "homepage": "http://adaptiveme.github.io/adaptive-arp-javascript/docs/latest/",
-  "bugs": {
-    "url": "https://github.com/AdaptiveMe/adaptive-arp-api/issues",
-    "email": "carlos@adaptive.me"
-  },
+  "homepage": "http://adaptive.cat",
+  "bugs": "http://github.com/AdaptiveMe/generator-adaptiveme/issues",
   "licenses": [
     {
       "type": "Apache 2.0"
@@ -24,20 +21,21 @@
   "author": {
     "name": "Carlos Lozano",
     "email": "carlos@adaptive.me",
-    "homepage": "https://github.com/carloslozano"
+    "url": "https://github.com/carloslozano"
   },
   "main": "app/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/AdaptiveMe"
-  },
-  "dependencies": {
-    "yeoman-generator": "^0.18.9",
-    "chalk": "^0.5.1"
+    "url": "https://github.com/AdaptiveMe/generator-adaptiveme"
   },
   "engines": {
     "node": ">=0.10.0",
     "npm": ">=1.4.0"
+  },
+  "dependencies": {
+    "yeoman-generator": "^0.18.9",
+    "chalk": "^0.5.1",
+    "yosay": "^1.0.2"
   },
   "devDependencies": {
     "chalk": "^0.5.1",
