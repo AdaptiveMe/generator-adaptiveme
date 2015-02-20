@@ -175,18 +175,7 @@ Apache License
 
    END OF TERMS AND CONDITIONS
 
-   APPENDIX: How to apply the Apache License to your work.
-
-      To apply the Apache License to your work, attach the following
-      boilerplate notice, with the fields enclosed by brackets "{}"
-      replaced with your own identifying information. (Don't include
-      the brackets!)  The text should be enclosed in the appropriate
-      comment syntax for the file format. We also recommend that a
-      file or class name and description of purpose be included on the
-      same "printed page" as the copyright notice for easier
-      identification within third-party archives.
-
-   Copyright {yyyy} {name of copyright owner}
+   Copyright 2013-2015 Carlos Lozano Diez t/a Adaptive.me.
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -199,4 +188,14 @@ Apache License
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License.
+   
+   APPENDIX: Adaptive.me Trademarks and Logos
 
+   This license does not grant you any rights to use the denominations 
+   "Adaptive", "Adaptive.me" or "Adaptive Runtime Platform" and/or "Adaptive”, 
+   "Adaptive.me"“, "Adaptive Runtime Platform" logos and/or trademarks even if 
+   such marks are included in the Original Code or Modifications. In particular, 
+   but not limited to, this License does not allow you to register or use any domain 
+   name and/or sub-domain name on the Internet related with or which totally or partially 
+   includes the denomination "Adaptive", "Adaptive.me" or "Adaptive Runtime Platform" 
+   and the "Adaptive", "Adaptive.me" or "Adaptive Runtime Platform" logos.
