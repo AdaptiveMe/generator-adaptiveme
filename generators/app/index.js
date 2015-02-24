@@ -35,7 +35,9 @@ var chalk = require('chalk');
 var util = require('util');
 var install = true;
 var server = true;
-var aVersion = 'latest';
+var param_app_name = '';
+var param_adaptive_version = 'latest';
+var param_typescript = false;
 
 module.exports = AdaptiveGenerator;
 
@@ -47,8 +49,9 @@ function AdaptiveGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
   // arguments
-  this.argument('application_name', {type: String, required: false, optional: true, desc: 'Your project name'});
-  this.argument('adaptive_version', {type: String, required: false, optional: true, desc: 'Adaptive Javascript Library version (defaults = latest)'});
+  this.argument('arg1', {type: String, required: false, optional: true, desc: 'Your project name'});
+  this.argument('arg2', {type: String, required: false, optional: true, desc: 'Adaptive Javascript Library version (defaults = latest)'});
+  this.argument('arg3', {type: Boolean, required: false, optional: true, desc: 'Add typescript support'});
 
   // options
   this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
@@ -92,13 +95,16 @@ AdaptiveGenerator.prototype.initializing = function initializing() {
 AdaptiveGenerator.prototype.prompting = function prompting() {
 
   // Check if the application_name is defined
-  if (typeof this.application_name == 'undefined' || typeof this.adaptive_version == 'undefined') {
+  if (typeof this.arg1 == 'undefined' || typeof this.arg2 == 'undefined' || typeof this.arg3 == 'undefined') {
     var done = this.async();
     this.prompt([{
       type: 'input',
       name: 'name',
       validate: function (input) {
-        if (/^([a-zA-Z0-9_]*)$/.test(input)) return true;
+        if (/^([a-zA-Z0-9_]*)$/.test(input)) {
+          param_app_name = input;
+          return true;
+        }
         return 'Your application name cannot contain special characters or a blank space, using the default name instead';
       },
       message: 'What is the base name of your application?',
@@ -108,20 +114,29 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
       name: 'version',
       validate: function (input) {
         if (/^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/.test(input) || input == "latest") {
-          aVersion = input;
+          param_adaptive_version = input;
           return true;
         } else {
           return 'The version of the library has to follow the Semantic Versioning (http://semver.org/) ';
         }
       },
       message: 'What version of Adaptive library want to use?',
-      default: aVersion
+      default: param_adaptive_version
+    },{
+      type: 'confirm',
+      name: 'param_typescript',
+      message: 'Do you want to add Typescript support to the project?',
+      default: param_typescript
     }], function (answers) {
+
+      param_typescript = answers.param_typescript;
+
       done();
     }.bind(this));
   } else {
-    this.appname = this.application_name;
-    aVersion = this.adaptive_version;
+    param_app_name = this.arg1;
+    param_adaptive_version = this.arg2;
+    param_typescript = this.arg3;
   }
 };
 
@@ -134,12 +149,20 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
   this.log(chalk.green("[generator-adaptive] Saving configurations and configure the project..."));
 
   this.template('_package.json', 'package.json', this, {});
-  this.template('_bower.json', 'bower.json', this, {'adaptive_version' : aVersion});
+  this.fs.copyTpl(
+    this.templatePath('_bower.json'),
+    this.destinationPath('bower.json'),
+    { app_name: param_app_name, adaptive_version : param_adaptive_version }
+  );
   this.template('_README.md', 'README.md', this, {});
   this.copy('gitignore', '.gitignore');
   this.copy('gitattributes', '.gitattributes');
 
-  this.template('Gruntfile.js', 'Gruntfile.js', this, {});
+  this.fs.copyTpl(
+    this.templatePath('Gruntfile.js'),
+    this.destinationPath('Gruntfile.js'),
+    { 'typescript': param_typescript }
+  );
 };
 
 /**
@@ -185,7 +208,11 @@ AdaptiveGenerator.prototype.writing = function writing() {
   this.mkdir(srcDir + imgDir);
 
   this.template(srcDir + 'index.html', srcDir + 'index.html', this, {});
-  this.template(srcDir + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+  if (param_typescript) {
+    this.template(srcDir + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+  } else {
+    this.template(srcDir + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+  }
   this.template(srcDir + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
   this.template(srcDir + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
 

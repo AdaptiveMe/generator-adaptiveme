@@ -1,6 +1,6 @@
 {
-  "name": "<%= appname %>",
-  "description": "Description for <%= appname %>",
+  "name": "<%= app_name %>",
+  "description": "Description for <%= app_name %>",
   "version": "0.0.0",
   "appPath": "src",
   "dependencies": {

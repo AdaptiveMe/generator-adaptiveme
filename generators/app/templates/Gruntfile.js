@@ -43,6 +43,14 @@ module.exports = function (grunt) {
   // Individual configurations for all the tasks
   grunt.initConfig({
 
+    <% if (typescript) { %>typescript: {
+      base: {
+        src: ['src/js/**/*.ts'],
+        dest: 'src/js/',
+        options: { declaration: false, sourceMap: false, module: 'commonjs', target: 'es5', basePath: 'src/js/', }
+      }
+    },<% } %>
+
     // Javascript validator. Skip files in '.jshintignore'
     jshint: {
       options: {jshintrc: 'config/validators/.jshintrc', ignores: []},
@@ -117,7 +125,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('default', ['server']);
-  grunt.registerTask('test', ['jshint', 'csslint']);
+  grunt.registerTask('test', [<% if(typescript) { %>'typescript', <% } %>'jshint', 'csslint']);
   grunt.registerTask('server', ['connect:livereload', 'open', 'watch']);
   grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'copy', 'filerev', 'usemin', 'htmlmin']);
 
@@ -137,5 +145,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-usemin');
+  <% if(typescript) { %>grunt.loadNpmTasks('grunt-typescript');<% } %>
 
 };
