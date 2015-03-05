@@ -95,30 +95,43 @@ module.exports = function (grunt) {
     // Configure the concat and uglify of de js and css
     useminPrepare: {
       html: 'src/*.html',
-      options: {dest: 'dist'}
+      options: {dest: 'dist/www'}
     },
 
     // Execute the tasks of minifying, compression, etc...
     usemin: {
-      html: 'dist/*.html',
-      css: ['dist/*.css']
+      html: 'dist/www/*.html',
+      css: ['dist/www/*.css']
     },
 
     // Copy the html and images
     copy: {
-      release: {files: [{expand: true, cwd: 'src', src: ['images/*.{png,gif,jpg,svg}', '*.html'], dest: 'dist'}]}
+      release: {files: [{expand: true, cwd: 'src', src: ['images/*.{png,gif,jpg,svg}','img/*.{png,gif,jpg,svg}', 'fonts/*', '*.html'], dest: 'dist/www'}]},
+      config: {files: [{expand: true, cwd: 'config', src: ['*.xml', '*.plist'], dest: 'dist/config'}]}
     },
 
     // Adds a custom file name to avoid cache
     filerev: {
       options: {encoding: 'utf8', algorithm: 'md5', length: 20},
-      release: {files: [{src: ['dist/images/*.{png,gif,jpg,svg}', 'dist/*.js', 'dist/*.css']}]}
+      release: {files: [{src: ['dist/www/images/*.{png,gif,jpg,svg}', 'dist/www/*.js', 'dist/www/*.css']}]}
     },
 
     htmlmin: {
       dist: {
         options: {removeComments: true, collapseWhitespace: true},
-        files: [{expand: true, cwd: 'dist', src: '*.html', dest: 'dist/'}]
+        files: [{expand: true, cwd: 'dist', src: '*.html', dest: 'dist/www/'}]
+      }
+    },
+
+    replace: {
+      html: {
+        src: ['dist/www/*.css'],
+          overwrite: true,
+          replacements: [
+            {from: '../fonts/', to: 'fonts/'},
+            {from: '../images/', to: 'images/'},
+            {from: '../img/', to: 'img/'},
+          ]
       }
     }
 
@@ -127,7 +140,11 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['server']);
   grunt.registerTask('test', [<% if(typescript) { %>'typescript', <% } %>'jshint', 'csslint']);
   grunt.registerTask('server', ['connect:livereload', 'open', 'watch']);
-  grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'copy', 'filerev', 'usemin', 'htmlmin']);
+  grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'copy:release', 'replace:html', 'copy:config', 'filerev', 'usemin', 'htmlmin']);
+
+  // alias tasks
+  grunt.registerTask('dist', ['build']);
+  grunt.registerTask('serve', ['server']);
 
   grunt.loadNpmTasks('connect-livereload');
   grunt.loadNpmTasks('grunt');
@@ -145,6 +162,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-filerev');
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-usemin');
+  grunt.loadNpmTasks('grunt-text-replace');
   <% if(typescript) { %>grunt.loadNpmTasks('grunt-typescript');<% } %>
 
 };

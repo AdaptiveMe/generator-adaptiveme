@@ -38,6 +38,13 @@ var server = true;
 var param_app_name = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
+var param_boilerplate = 0; // HTML5 Boilerplate
+
+// Boilerplate options
+var html5 = "HTML5 Boilerplate";
+var mobile = "Mobile HTML5 Boilerplate";
+var responsive = "Initializr Responsive";
+var boostrap = "Initializr Boostrap";
 
 module.exports = AdaptiveGenerator;
 
@@ -52,6 +59,7 @@ function AdaptiveGenerator(args, options, config) {
   this.argument('arg1', {type: String, required: false, optional: true, desc: 'Your project name'});
   this.argument('arg2', {type: String, required: false, optional: true, desc: 'Adaptive Javascript Library version (defaults = latest)'});
   this.argument('arg3', {type: Boolean, required: false, optional: true, desc: 'Add typescript support'});
+  this.argument('arg4', {type: String, required: false, optional: true, desc: 'Boilerplate for initialize application'});
 
   // options
   this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
@@ -127,16 +135,32 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
       name: 'param_typescript',
       message: 'Do you want to add Typescript support to the project?',
       default: param_typescript
+    },{
+      type: 'list',
+      name: 'param_boilerplate',
+      message: 'Select one boilerplate to initialize the application:',
+      choices: [
+        html5, // Empty application with some HTML5 features (CSS normalization, Modernizr) - http://demo.html5boilerplate.com/
+        mobile, // Simple Mobile Application Boilerplate (jQuery, CSS normalization, Mobile Optimizations) - https://html5boilerplate.com/mobile/
+        responsive, // Responsive Boilerplate for creating multi-device applications (CSS normalization, Modernizr) - http://www.initializr.com/try
+        boostrap, // Boilerplate template for creating applications with boostrap (Boostrap) - http://getbootstrap.com/examples/jumbotron/
+        "None"
+      ],
+      default: param_boilerplate
     }], function (answers) {
 
       param_typescript = answers.param_typescript;
+      param_boilerplate = answers.param_boilerplate;
 
       done();
+
     }.bind(this));
+
   } else {
     param_app_name = this.arg1;
     param_adaptive_version = this.arg2;
     param_typescript = this.arg3;
+    param_boilerplate = this.arg4;
   }
 };
 
@@ -149,11 +173,6 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
   this.log(chalk.green("[generator-adaptive] Saving configurations and configure the project..."));
 
   this.template('_package.json', 'package.json', this, {});
-  this.fs.copyTpl(
-    this.templatePath('_bower.json'),
-    this.destinationPath('bower.json'),
-    { app_name: param_app_name, adaptive_version : param_adaptive_version }
-  );
   this.template('_README.md', 'README.md', this, {});
   this.copy('gitignore', '.gitignore');
   this.copy('gitattributes', '.gitattributes');
@@ -186,7 +205,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
   var cssDir = 'css/';
   var jsDir = 'js/';
-  var imgDir = 'images/';
+  var fontsDir = 'fonts/';
 
   this.log(chalk.green("[generator-adaptive] Copying application folders and files..."));
 
@@ -203,6 +222,9 @@ AdaptiveGenerator.prototype.writing = function writing() {
   this.template(cfgDir + 'io-config.xml', cfgDir + 'io-config.xml', this, {});
 
   this.mkdir(srcDir);
+  this.mkdir(distDir);
+
+  /* fnva: 150305 - Add boilerplate support
   this.mkdir(srcDir + cssDir);
   this.mkdir(srcDir + jsDir);
   this.mkdir(srcDir + imgDir);
@@ -215,8 +237,159 @@ AdaptiveGenerator.prototype.writing = function writing() {
   }
   this.template(srcDir + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
   this.template(srcDir + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
+  */
 
-  this.mkdir(distDir);
+  var boilerplateSrc = '';
+
+  switch (param_boilerplate) {
+    case  html5:
+
+      /*
+      HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
+       */
+
+      boilerplateSrc = 'html5/';
+
+      // bower dependencies
+      this.fs.copyTpl(
+        this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
+        this.destinationPath('bower.json'),
+        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+      );
+
+      this.mkdir(srcDir + cssDir);
+      this.mkdir(srcDir + jsDir);
+
+      this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
+      if (param_typescript) {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+      } else {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+      }
+      this.template(srcDir + boilerplateSrc + cssDir + 'main.css', srcDir + cssDir + 'main.css', this, {});
+
+      break;
+
+    case mobile:
+
+      /*
+      MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
+       */
+
+      boilerplateSrc = 'mobile/';
+
+      // bower dependencies
+      this.fs.copyTpl(
+        this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
+        this.destinationPath('bower.json'),
+        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+      );
+
+      this.mkdir(srcDir + cssDir);
+      this.mkdir(srcDir + jsDir);
+
+      this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
+      this.template(srcDir + boilerplateSrc + 'LICENSE.md', srcDir + 'LICENSE.md', this, {});
+      if (param_typescript) {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+      } else {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+      }
+      this.template(srcDir + boilerplateSrc + jsDir + 'helper.js', srcDir + jsDir + 'helper.js', this, {});
+      this.template(srcDir + boilerplateSrc + cssDir + 'main.css', srcDir + cssDir + 'main.css', this, {});
+
+      break;
+
+    case responsive:
+
+      /*
+      RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
+       */
+
+      boilerplateSrc = 'responsive/';
+
+      // bower dependencies
+      this.fs.copyTpl(
+        this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
+        this.destinationPath('bower.json'),
+        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+      );
+
+      this.mkdir(srcDir + cssDir);
+      this.mkdir(srcDir + jsDir);
+
+      this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
+      if (param_typescript) {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+      } else {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+      }
+      this.template(srcDir + boilerplateSrc + cssDir + 'main.css', srcDir + cssDir + 'main.css', this, {});
+
+      break;
+
+    case boostrap:
+
+      /*
+      BOOSTRAP Boilerplate
+       */
+
+      boilerplateSrc = 'boostrap/';
+
+      // bower dependencies
+      this.fs.copyTpl(
+        this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
+        this.destinationPath('bower.json'),
+        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+      );
+
+      this.mkdir(srcDir + cssDir);
+      this.mkdir(srcDir + jsDir);
+      this.mkdir(srcDir + fontsDir);
+
+      this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
+      if (param_typescript) {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+      } else {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+      }
+      this.template(srcDir + boilerplateSrc + cssDir + 'main.css', srcDir + cssDir + 'main.css', this, {});
+
+      this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.eot', srcDir + fontsDir + 'glyphicons-halflings-regular.eot', this, {});
+      this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.svg', srcDir + fontsDir + 'glyphicons-halflings-regular.svg', this, {});
+      this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.ttf', srcDir + fontsDir + 'glyphicons-halflings-regular.ttf', this, {});
+      this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.woff', srcDir + fontsDir + 'glyphicons-halflings-regular.woff', this, {});
+
+      break;
+
+    default:
+
+      /*
+      NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
+       */
+
+      boilerplateSrc = 'none/';
+
+      // bower dependencies
+      this.fs.copyTpl(
+        this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
+        this.destinationPath('bower.json'),
+        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+      );
+
+      this.mkdir(srcDir + cssDir);
+      this.mkdir(srcDir + jsDir);
+
+      this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
+      if (param_typescript) {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+      } else {
+        this.template(srcDir + boilerplateSrc + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+      }
+      this.template(srcDir + boilerplateSrc + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
+      this.template(srcDir + boilerplateSrc + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
+  }
+
 };
 
 /**

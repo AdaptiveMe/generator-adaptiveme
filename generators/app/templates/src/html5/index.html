@@ -1,0 +1,30 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title><%= appname %></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- build:css style.min.css -->
+  <link rel="stylesheet" href="../bower_components/normalize.css/normalize.css">
+  <link rel="stylesheet" href="css/main.css">
+  <!-- endbuild -->
+
+  <!-- build:js app.min.js -->
+  <script type="text/javascript" src="../bower_components/modernizr/modernizr.js"></script>
+  <script type="text/javascript" src="../bower_components/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="../bower_components/adaptiveme/adaptive.js"></script>
+  <script src="js/main.js"></script>
+  <!-- endbuild -->
+</head>
+<body onload="init()">
+
+<h1>Hello Adaptive <span id="version"></span></h1>
+<p><b>Device</b>: <span id="device"></span></p>
+<p><b>Operating System</b>: <span id="os-info"></span></p>
+<p><b>Locale</b>: <span id="locale"></span></p>
+
+</body>
+</html>
