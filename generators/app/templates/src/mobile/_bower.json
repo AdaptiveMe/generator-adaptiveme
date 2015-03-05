@@ -1,0 +1,14 @@
+{
+  "name": "<%= app_name %>",
+  "description": "Description for <%= app_name %>",
+  "version": "0.0.0",
+  "appPath": "src",
+  "dependencies": {
+    "adaptiveme": "<%= adaptive_version %>",
+    "normalize.css": "3.0.0",
+    "modernizr": "2.7.1",
+    "jquery": "2.1.0"
+  },
+  "devDependencies": {
+  }
+}
