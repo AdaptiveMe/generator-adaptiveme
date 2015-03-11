@@ -8,4 +8,4 @@ deploy:
     secure: SagzAI364KBH0seGaqiQjnY22IbrBTLzCz0UPyRLo0qzLlYJ2OiQOqrEPwFKNz/+s1/ErtzVykf66zWukNst4RAUj6s2L2iAuFwgakFyLgHUYYS3CtHZoDo5Ihu3l39InOnW6vEQk0oHjIJTb0anu2RHDhD0GBeP9lVXFV8wdoQ=
   on:
     tags: true
-    
+    repo: AdaptiveMe/generator-adaptiveme
