@@ -1,4 +1,4 @@
-# Adaptive Application Generator for Yeoman 
+# Adaptive App Generator for Yeoman 
 [![Build Status](https://travis-ci.org/AdaptiveMe/generator-adaptiveme.svg?branch=master)](https://travis-ci.org/AdaptiveMe/generator-adaptiveme)
 [![GitHub tag](https://img.shields.io/github/tag/AdaptiveMe/generator-adaptiveme.svg)](https://github.com/AdaptiveMe/generator-adaptiveme) 
 [![Adaptive Generator for Yeoman](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/generator-adaptiveme) 
