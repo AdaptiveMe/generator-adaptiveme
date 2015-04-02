@@ -111,7 +111,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
           param_app_name = input;
           return true;
         }
-        return 'Your application name cannot contain special characters or a blank space, using the default name instead';
+        return 'Your application name cannot contain special characters or a blank space';
       },
       message: 'What is the base name of your application?',
       default: this.appname
