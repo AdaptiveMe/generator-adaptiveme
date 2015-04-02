@@ -1,7 +1,16 @@
 {
   "name": "generator-adaptiveme",
-  "version": "1.0.6",
-  "description": "AdaptiveMe Runtime Platform (ARP) app generator.",
+  "version": "2.0.0",
+  "description": "Adaptive.me app generator - Yeoman Generator for Adaptive Runtime Platform.",
+  "preferGlobal": "true",
+  "main": "app/index.js",
+  "scripts": {
+    "test": "grunt"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdaptiveMe/generator-adaptiveme"
+  },
   "keywords": [
     "yeoman-generator",
     "adaptive",
@@ -11,26 +20,18 @@
     "desktop",
     "framework"
   ],
-  "homepage": "http://adaptive.cat",
-  "bugs": "http://github.com/AdaptiveMe/generator-adaptiveme/issues",
-  "licenses": [
-    {
-      "type": "Apache 2.0"
-    }
-  ],
   "author": {
     "name": "Carlos Lozano",
     "email": "carlos@adaptive.me",
     "url": "https://github.com/carloslozano"
   },
-  "main": "app/index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/AdaptiveMe/generator-adaptiveme"
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/AdaptiveMe/generator-adaptiveme/issues"
   },
+  "homepage": "http://adaptive.cat",
   "engines": {
-    "node": ">=0.10.0",
-    "npm": ">=1.4.0"
+    "node": ">=0.12.0"
   },
   "dependencies": {
     "chalk": "^0.5.1",
@@ -38,28 +39,15 @@
     "yosay": "^1.0.2"
   },
   "devDependencies": {
-    "chalk": "^0.5.1",
-    "connect-livereload": "^0.5.3",
     "grunt": "^0.4.5",
+    "grunt-bump": "^0.3.0",
     "grunt-cli": "^0.1.13",
-    "grunt-contrib-clean": "^0.6.0",
-    "grunt-contrib-concat": "^0.5.1",
-    "grunt-contrib-connect": "^0.9.0",
-    "grunt-contrib-copy": "^0.7.0",
-    "grunt-contrib-csslint": "^0.4.0",
-    "grunt-contrib-cssmin": "^0.12.1",
-    "grunt-contrib-htmlmin": "^0.4.0",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-contrib-uglify": "^0.7.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "grunt-exec": "^0.4.6",
-    "grunt-filerev": "^2.1.2",
-    "grunt-open": "^0.2.3",
-    "grunt-usemin": "^3.0.0",
-    "yeoman-generator": "^0.18.9",
-    "yo": "^1.3.3",
-    "grunt-typescript": "^0.6.1",
-    "grunt-text-replace": "^0.4.0",
-    "typescript": "^1.4.1"
+    "grunt-eslint": "^9.0.0",
+    "grunt-jscs": "^1.5.0",
+    "grunt-mocha-test": "^0.12.7",
+    "grunt-release": "^0.12.0",
+    "load-grunt-tasks": "^3.1.0",
+    "mocha": "^2.2.1",
+    "time-grunt": "^1.1.0"
   }
 }

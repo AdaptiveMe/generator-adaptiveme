@@ -42,10 +42,10 @@ var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
 
 // Boilerplate options
-var html5 = "HTML5 Boilerplate";
-var mobile = "Mobile HTML5 Boilerplate";
-var responsive = "Initializr Responsive";
-var boostrap = "Initializr Boostrap";
+var html5 = 'HTML5 Boilerplate';
+var mobile = 'Mobile HTML5 Boilerplate';
+var responsive = 'Initializr Responsive';
+var boostrap = 'Initializr Boostrap';
 
 module.exports = AdaptiveGenerator;
 
@@ -58,9 +58,19 @@ function AdaptiveGenerator(args, options, config) {
 
   // arguments
   this.argument('arg1', {type: String, required: false, optional: true, desc: 'Your project name'});
-  this.argument('arg2', {type: String, required: false, optional: true, desc: 'Adaptive Javascript Library version (defaults = latest)'});
+  this.argument('arg2', {
+    type: String,
+    required: false,
+    optional: true,
+    desc: 'Adaptive Javascript Library version (defaults = latest)'
+  });
   this.argument('arg3', {type: Boolean, required: false, optional: true, desc: 'Add typescript support'});
-  this.argument('arg4', {type: String, required: false, optional: true, desc: 'Boilerplate for initialize application'});
+  this.argument('arg4', {
+    type: String,
+    required: false,
+    optional: true,
+    desc: 'Boilerplate for initialize application'
+  });
 
   // options
   this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
@@ -75,13 +85,13 @@ util.inherits(AdaptiveGenerator, yeoman.generators.Base);
  */
 AdaptiveGenerator.prototype.initializing = function initializing() {
 
-  this.log(chalk.green("[generator-adaptive] Starting generator..."));
+  this.log(chalk.green('[generator-adaptive] Starting generator...'));
 
   if (this.options['skip-install']) {
-    install = false
+    install = false;
   }
   if (this.options['skip-server']) {
-    server = false
+    server = false;
   }
 };
 
@@ -105,11 +115,11 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
       },
       message: 'What is the base name of your application?',
       default: this.appname
-    },{
+    }, {
       type: 'input',
       name: 'version',
       validate: function (input) {
-        if (/^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/.test(input) || input == "latest") {
+        if (/^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/.test(input) || input === 'latest') {
           param_adaptive_version = input;
           return true;
         } else {
@@ -118,12 +128,12 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
       },
       message: 'What version of Adaptive library want to use?',
       default: param_adaptive_version
-    },{
+    }, {
       type: 'confirm',
       name: 'param_typescript',
       message: 'Do you want to add Typescript support to the project?',
       default: param_typescript
-    },{
+    }, {
       type: 'list',
       name: 'param_boilerplate',
       message: 'Select one boilerplate to initialize the application:',
@@ -132,7 +142,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
         mobile, // Simple Mobile Application Boilerplate (jQuery, CSS normalization, Mobile Optimizations) - https://html5boilerplate.com/mobile/
         responsive, // Responsive Boilerplate for creating multi-device applications (CSS normalization, Modernizr) - http://www.initializr.com/try
         boostrap, // Boilerplate template for creating applications with boostrap (Boostrap) - http://getbootstrap.com/examples/jumbotron/
-        "None"
+        'None'
       ],
       default: param_boilerplate
     }], function (answers) {
@@ -158,7 +168,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
  */
 AdaptiveGenerator.prototype.configuring = function configuring() {
 
-  this.log(chalk.green("[generator-adaptive] Saving configurations and configure the project..."));
+  this.log(chalk.green('[generator-adaptive] Saving configurations and configure the project...'));
 
   this.template('_package.json', 'package.json', this, {});
   this.template('_README.md', 'README.md', this, {});
@@ -168,7 +178,7 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
   this.fs.copyTpl(
     this.templatePath('Gruntfile.js'),
     this.destinationPath('Gruntfile.js'),
-    { 'typescript': param_typescript }
+    {typescript: param_typescript}
   );
 };
 
@@ -195,7 +205,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
   var jsDir = 'js/';
   var fontsDir = 'fonts/';
 
-  this.log(chalk.green("[generator-adaptive] Copying application folders and files..."));
+  this.log(chalk.green('[generator-adaptive] Copying application folders and files...'));
 
   this.mkdir(cfgDir);
   this.mkdir(cfgDir + defDir);
@@ -213,27 +223,27 @@ AdaptiveGenerator.prototype.writing = function writing() {
   this.mkdir(distDir);
 
   /* fnva: 150305 - Add boilerplate support
-  this.mkdir(srcDir + cssDir);
-  this.mkdir(srcDir + jsDir);
-  this.mkdir(srcDir + imgDir);
+   this.mkdir(srcDir + cssDir);
+   this.mkdir(srcDir + jsDir);
+   this.mkdir(srcDir + imgDir);
 
-  this.template(srcDir + 'index.html', srcDir + 'index.html', this, {});
-  if (param_typescript) {
-    this.template(srcDir + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
-  } else {
-    this.template(srcDir + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
-  }
-  this.template(srcDir + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
-  this.template(srcDir + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
-  */
+   this.template(srcDir + 'index.html', srcDir + 'index.html', this, {});
+   if (param_typescript) {
+   this.template(srcDir + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
+   } else {
+   this.template(srcDir + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
+   }
+   this.template(srcDir + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
+   this.template(srcDir + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
+   */
 
   var boilerplateSrc = '';
 
   switch (param_boilerplate) {
-    case  html5:
+    case html5:
 
       /*
-      HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
+       HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
        */
 
       boilerplateSrc = 'html5/';
@@ -242,7 +252,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
       this.fs.copyTpl(
         this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
         this.destinationPath('bower.json'),
-        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+        {app_name: param_app_name, adaptive_version: param_adaptive_version}
       );
 
       this.mkdir(srcDir + cssDir);
@@ -261,7 +271,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     case mobile:
 
       /*
-      MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
+       MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
        */
 
       boilerplateSrc = 'mobile/';
@@ -270,7 +280,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
       this.fs.copyTpl(
         this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
         this.destinationPath('bower.json'),
-        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+        {app_name: param_app_name, adaptive_version: param_adaptive_version}
       );
 
       this.mkdir(srcDir + cssDir);
@@ -291,7 +301,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     case responsive:
 
       /*
-      RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
+       RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
        */
 
       boilerplateSrc = 'responsive/';
@@ -300,7 +310,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
       this.fs.copyTpl(
         this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
         this.destinationPath('bower.json'),
-        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+        {app_name: param_app_name, adaptive_version: param_adaptive_version}
       );
 
       this.mkdir(srcDir + cssDir);
@@ -319,7 +329,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     case boostrap:
 
       /*
-      BOOSTRAP Boilerplate
+       BOOSTRAP Boilerplate
        */
 
       boilerplateSrc = 'boostrap/';
@@ -328,7 +338,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
       this.fs.copyTpl(
         this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
         this.destinationPath('bower.json'),
-        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+        {app_name: param_app_name, adaptive_version: param_adaptive_version}
       );
 
       this.mkdir(srcDir + cssDir);
@@ -353,7 +363,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     default:
 
       /*
-      NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
+       NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
        */
 
       boilerplateSrc = 'none/';
@@ -362,7 +372,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
       this.fs.copyTpl(
         this.templatePath(srcDir + boilerplateSrc + '_bower.json'),
         this.destinationPath('bower.json'),
-        { app_name: param_app_name, adaptive_version : param_adaptive_version }
+        {app_name: param_app_name, adaptive_version: param_adaptive_version}
       );
 
       this.mkdir(srcDir + cssDir);
@@ -391,17 +401,18 @@ AdaptiveGenerator.prototype.conflicts = function conflicts() {
  * bower install & npm install
  */
 AdaptiveGenerator.prototype.install = function installation() {
-  this.log(chalk.green("[generator-adaptive] Installing dependencies... " + install));
+  this.log(chalk.green('[generator-adaptive] Installing dependencies... ' + install));
   //this.installDependencies({skipInstall: !install});
 
   this.installDependencies({
     skipInstall: !install,
     callback: function () {
 
-      this.log(chalk.green("[generator-adaptive] Installing adaptive-nibble... "));
-      child_process.exec('node node_modules/npm-adaptiveme-nibble/bin/index.js -r -p http://adaptiveme.github.io/ ', function(error, stdout, stderr){
+      this.log(chalk.green('[generator-adaptive] Installing adaptive-nibble... '));
+      child_process.exec('node node_modules/npm-adaptiveme-nibble/bin/index.js -r -p http://adaptiveme.github.io/ ', function (error, stdout, stderr) {
         if (error) {
           console.log(chalk.red(error));
+          console.log(chalk.red(stderr));
         }
         console.log(stdout);
       });
