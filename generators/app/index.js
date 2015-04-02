@@ -33,6 +33,7 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var util = require('util');
+var child_process = require('child_process');
 var install = true;
 var server = true;
 var param_app_name = '';
@@ -74,20 +75,7 @@ util.inherits(AdaptiveGenerator, yeoman.generators.Base);
  */
 AdaptiveGenerator.prototype.initializing = function initializing() {
 
-  var welcome =
-    chalk.cyan.bold("\n....###....########.....###....########..########.####.##.....##.########") +
-    chalk.cyan.bold("\n...##.##...##.....##...##.##...##.....##....##.....##..##.....##.##......") +
-    chalk.cyan.bold("\n..##...##..##.....##..##...##..##.....##....##.....##..##.....##.##......") +
-    chalk.cyan.bold("\n.##.....##.##.....##.##.....##.########.....##.....##..##.....##.######..") +
-    chalk.cyan.bold("\n.#########.##.....##.#########.##...........##.....##...##...##..##......") +
-    chalk.cyan.bold("\n.##.....##.##.....##.##.....##.##...........##.....##....##.##...##......") +
-    chalk.cyan.bold("\n.##.....##.########..##.....##.##...........##....####....###....########") +
-    "\n";
-
-  console.log(welcome);
-
   this.log(chalk.green("[generator-adaptive] Starting generator..."));
-
 
   if (this.options['skip-install']) {
     install = false
@@ -404,7 +392,23 @@ AdaptiveGenerator.prototype.conflicts = function conflicts() {
  */
 AdaptiveGenerator.prototype.install = function installation() {
   this.log(chalk.green("[generator-adaptive] Installing dependencies... " + install));
-  this.installDependencies({skipInstall: !install});
+  //this.installDependencies({skipInstall: !install});
+
+  this.installDependencies({
+    skipInstall: !install,
+    callback: function () {
+
+      this.log(chalk.green("[generator-adaptive] Installing adaptive-nibble... "));
+      child_process.exec('node node_modules/npm-adaptiveme-nibble/bin/index.js -r -p http://adaptiveme.github.io/ ', function(error, stdout, stderr){
+        if (error) {
+          console.log(chalk.red(error));
+        }
+        console.log(stdout);
+      });
+
+    }.bind(this)
+  });
+
 };
 
 /**
@@ -414,6 +418,6 @@ AdaptiveGenerator.prototype.end = function end() {
 
   if (install && server) {
     // Execute grunt task
-    this.spawnCommand('grunt', ['test', 'server']);
+    this.spawnCommand('grunt', ['test', 'nibble']);
   }
 };

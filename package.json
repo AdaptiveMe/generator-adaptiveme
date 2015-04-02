@@ -1,6 +1,6 @@
 {
   "name": "generator-adaptiveme",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "AdaptiveMe Runtime Platform (ARP) app generator.",
   "keywords": [
     "yeoman-generator",
@@ -52,6 +52,7 @@
     "grunt-contrib-jshint": "^0.11.0",
     "grunt-contrib-uglify": "^0.7.0",
     "grunt-contrib-watch": "^0.6.1",
+    "grunt-exec": "^0.4.6",
     "grunt-filerev": "^2.1.2",
     "grunt-open": "^0.2.3",
     "grunt-usemin": "^3.0.0",

@@ -133,6 +133,10 @@ module.exports = function (grunt) {
             {from: '../img/', to: 'img/'},
           ]
       }
+    },
+
+    exec: {
+      nibble: 'node node_modules/npm-adaptiveme-nibble/bin/index.js -p src -w true'
     }
 
   });
@@ -140,6 +144,7 @@ module.exports = function (grunt) {
   grunt.registerTask('default', ['server']);
   grunt.registerTask('test', [<% if(typescript) { %>'typescript', <% } %>'jshint', 'csslint']);
   grunt.registerTask('server', ['connect:livereload', 'open', 'watch']);
+  grunt.registerTask('nibble', 'exec:nibble')
   grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'copy:release', 'replace:html', 'copy:config', 'filerev', 'usemin', 'htmlmin']);
 
   // alias tasks
@@ -163,6 +168,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-open');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-text-replace');
+  grunt.loadNpmTasks('grunt-exec');
   <% if(typescript) { %>grunt.loadNpmTasks('grunt-typescript');<% } %>
 
 };
