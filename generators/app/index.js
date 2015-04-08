@@ -406,18 +406,7 @@ AdaptiveGenerator.prototype.install = function installation() {
 
   this.installDependencies({
     skipInstall: !install,
-    callback: function () {
-
-      this.log(chalk.green('[generator-adaptive] Installing adaptive-nibble... '));
-      child_process.exec('node node_modules/npm-adaptiveme-nibble/bin/index.js -r -p http://adaptiveme.github.io/ ', function (error, stdout, stderr) {
-        if (error) {
-          console.log(chalk.red(error));
-          console.log(chalk.red(stderr));
-        }
-        console.log(stdout);
-      });
-
-    }.bind(this)
+    callback: function () { }.bind(this)
   });
 
 };
@@ -429,6 +418,7 @@ AdaptiveGenerator.prototype.end = function end() {
 
   if (install && server) {
     // Execute grunt task
-    this.spawnCommand('grunt', ['test', 'nibble']);
+    //this.spawnCommand('grunt', ['test', 'nibble']);
+    this.spawnCommand('grunt', ['test']);
   }
 };

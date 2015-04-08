@@ -133,18 +133,18 @@ module.exports = function (grunt) {
             {from: '../img/', to: 'img/'},
           ]
       }
-    },
+    }/*,
 
     exec: {
       nibble: 'node node_modules/npm-adaptiveme-nibble/bin/index.js -p src -w true'
-    }
+    }*/
 
   });
 
   grunt.registerTask('default', ['server']);
   grunt.registerTask('test', [<% if(typescript) { %>'typescript', <% } %>'jshint', 'csslint']);
   grunt.registerTask('server', ['connect:livereload', 'open', 'watch']);
-  grunt.registerTask('nibble', 'exec:nibble')
+  //grunt.registerTask('nibble', 'exec:nibble');
   grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated', 'uglify:generated', 'copy:release', 'replace:html', 'copy:config', 'filerev', 'usemin', 'htmlmin']);
 
   // alias tasks
