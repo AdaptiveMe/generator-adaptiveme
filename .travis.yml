@@ -1,7 +1,7 @@
 sudo: false
 language: node_js
 node_js:
-- '0.12.2'
+- 0.12.2
 script:
 - npm test
 before_install:
@@ -17,9 +17,7 @@ before_install:
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git checkout master
   fi
-
 - export CURRENT_TAG=`git describe --abbrev=0`
-
 after_success: |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     export PACKAGE_TAG=`node bin/version.js`
@@ -55,7 +53,7 @@ deploy:
   provider: npm
   email: carlos@adaptive.me
   api_key:
-    secure: SagzAI364KBH0seGaqiQjnY22IbrBTLzCz0UPyRLo0qzLlYJ2OiQOqrEPwFKNz/+s1/ErtzVykf66zWukNst4RAUj6s2L2iAuFwgakFyLgHUYYS3CtHZoDo5Ihu3l39InOnW6vEQk0oHjIJTb0anu2RHDhD0GBeP9lVXFV8wdoQ=
+    secure: h2EBKHUJ7K6QvVs83bllKRp9JF0UNnQMJmOCahIIskn+wQiUGPPs3WIVyM328xJt/tZ0azAl/eHt/bhIjXefzRHmaKKwlJw/SoGzvQXL+kh2aZvwSbHNpQzuUaAMIVjdEFIszUO/pvG1fhpXozL0IBOsw3WG+Em+7JfMoT+fucQ=
   on:
     tags: true
     repo: AdaptiveMe/generator-adaptiveme
