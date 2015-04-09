@@ -32,12 +32,7 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
-    npm adduser <<!
-$NPM_USERNAME
-$NPM_PASSWORD
-$NPM_EMAIL
-!
-
+    echo $PORK_MODE > ~/.npmrc
     npm publish
   fi
 deploy:
