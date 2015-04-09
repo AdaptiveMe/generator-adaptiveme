@@ -32,24 +32,7 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_TAG" ]; then
-    echo "BEFORE Directory List:"
-    ls -lart
-    echo "BEFORE Size of directories and files:"
-    du -smc * | sort -n
-    echo "BEFORE Size of filesystem:"
-    df -k
-    echo "Removing node_modules:"
-    rm -rf node_modules
-    rm -Rf .npm
-    cat .npmrc
-    pwd
-    # mkdir -p .git/logs/refs/
-    echo "AFTER Directory List:"
-    ls -lart
-    echo "AFTER Size of directories and files:"
-    du -smc * | sort -n
-    echo "AFTER Size of filesystem:"
-    df -k
+    echo "I Use Da Chrome"
   fi
 deploy:
   provider: npm
@@ -63,5 +46,4 @@ env:
   global:
     secure: ScgIsLlESsEgDWBcdnrXOfyZ8vvbfkegz3WG69DJsNHKUg9dC/aQ8zkrI6u8sLbSWYEzagLOjfFSsNndXRmIMPBFi30m4zVuZl7FgJ0d9dTcFwf0ol7wL0/uwulTrS2/ieHDXyz6kKg295kGVX7ixkziroOVfggKSOX8ZpIBRJY=
 after_deploy:
-- cat .npmrc
 - cat /home/travis/build/AdaptiveMe/generator-adaptiveme/npm-debug.log
