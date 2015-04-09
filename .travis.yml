@@ -43,7 +43,8 @@ after_success: |-
     echo "Removing node_modules:"
     rm -rf node_modules
     pwd
-    mkdir -p .git/logs/refs/stash
+    mkdir -p .git/logs/refs/
+    chmod 777 -R .git/logs/refs/
     git stash -u
     echo "AFTER Directory List:"
     ls -lart
