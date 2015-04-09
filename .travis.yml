@@ -5,6 +5,7 @@ node_js:
 script:
 - npm test
 before_install:
+- npm cache clean
 - export HOME=`pwd`
 - mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
