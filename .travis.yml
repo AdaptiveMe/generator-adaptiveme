@@ -40,7 +40,8 @@ after_success: |-
     df -k
     echo "Removing node_modules:"
     rm -rf node_modules
-    # npm cache clean
+    rm -Rf .npm
+    cat .npmrc
     pwd
     # mkdir -p .git/logs/refs/
     echo "AFTER Directory List:"
