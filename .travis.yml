@@ -3,7 +3,7 @@ language: node_js
 node_js:
 - 0.12.2
 script:
-- npm test
+- npm -v
 before_install:
 - npm install -g npm@latest
 - npm -v
