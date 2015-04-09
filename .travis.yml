@@ -35,7 +35,7 @@ after_success: |-
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "QuirksMode Style."
     echo $PORK_MODE > ~/.npmrc
-    npm publish
+    npm publish .
   fi
 deploy:
   provider: npm
