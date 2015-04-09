@@ -33,7 +33,6 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var util = require('util');
-var child_process = require('child_process');
 var install = true;
 var server = true;
 var param_app_name = '';
@@ -57,19 +56,17 @@ function AdaptiveGenerator(args, options, config) {
   yeoman.generators.Base.apply(this, arguments);
 
   // arguments
-  this.argument('arg1', {type: String, required: false, optional: true, desc: 'Your project name'});
-  this.argument('arg2', {
-    type: String,
-    required: false,
-    optional: true,
-    desc: 'Adaptive Javascript Library version (defaults = latest)'
+  this.argument('arg1', {
+    type: String, required: false, optional: true, desc: 'Your project name'
   });
-  this.argument('arg3', {type: Boolean, required: false, optional: true, desc: 'Add typescript support'});
+  this.argument('arg2', {
+    type: String, required: false, optional: true, desc: 'Adaptive Javascript Library version (defaults = latest)'
+  });
+  this.argument('arg3', {
+    type: Boolean, required: false, optional: true, desc: 'Add typescript support'
+  });
   this.argument('arg4', {
-    type: String,
-    required: false,
-    optional: true,
-    desc: 'Boilerplate for initialize application'
+    type: String, required: false, optional: true, desc: 'Boilerplate for initialize application'
   });
 
   // options
@@ -406,7 +403,8 @@ AdaptiveGenerator.prototype.install = function installation() {
 
   this.installDependencies({
     skipInstall: !install,
-    callback: function () { }.bind(this)
+    callback: function () {
+    }.bind(this)
   });
 
 };
