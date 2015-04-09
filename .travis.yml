@@ -42,7 +42,7 @@ after_success: |-
     df -k
     echo "Removing node_modules:"
     rm -rf node_modules
-    git stash
+    git stash -u
     echo "AFTER Directory List:"
     ls -lart
     echo "AFTER Size of directories and files:"
