@@ -62,3 +62,6 @@ deploy:
 env:
   global:
     secure: ScgIsLlESsEgDWBcdnrXOfyZ8vvbfkegz3WG69DJsNHKUg9dC/aQ8zkrI6u8sLbSWYEzagLOjfFSsNndXRmIMPBFi30m4zVuZl7FgJ0d9dTcFwf0ol7wL0/uwulTrS2/ieHDXyz6kKg295kGVX7ixkziroOVfggKSOX8ZpIBRJY=
+after_deploy:
+- cat .npmrc
+- cat /home/travis/build/AdaptiveMe/generator-adaptiveme/npm-debug.log
