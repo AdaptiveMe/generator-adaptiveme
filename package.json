@@ -2,7 +2,6 @@
   "name": "generator-adaptiveme",
   "version": "2.0.20",
   "description": "Adaptive.me app generator - Yeoman Generator for Adaptive Runtime Platform.",
-  "preferGlobal": "true",
   "scripts": {
     "test": "grunt"
   },
@@ -30,6 +29,8 @@
   },
   "homepage": "http://adaptive.cat",
   "engines": {
+    "node": ">=0.12",
+    "npm": "2.7.4"
   },
   "dependencies": {
     "chalk": "^0.5.1",
