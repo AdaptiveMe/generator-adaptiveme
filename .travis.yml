@@ -5,8 +5,8 @@ node_js:
 script:
 - npm -v
 before_install:
-- npm install -g npm@latest
-- npm -v
+- npm install -g npm@2.7.6
+- npm test
 - npm cache clean
 - export HOME=`pwd`
 - mkdir -p .git
