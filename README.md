@@ -5,6 +5,7 @@
 [![Adaptive Generator for Yeoman](https://img.shields.io/node/v/gh-badges.svg)](https://www.npmjs.com/package/generator-adaptiveme)
 [![License](https://img.shields.io/badge/license-apache%202-blue.svg)](https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-api/master/LICENSE) 
 [![Adaptive Generator for Yeoman](https://img.shields.io/badge/devtools-yeoman-yellow.svg)](https://github.com/AdaptiveMe/generator-adaptiveme) [![adaptive.me](https://img.shields.io/badge/adaptive-me-fdcb0e.svg)](http://adaptive.me)
+
 [![Adaptive Runtime Platform](https://raw.githubusercontent.com/AdaptiveMe/AdaptiveMe.github.io/master/assets/logos/normal/Logo-devtools-for-Yeoman.png)](#)
 
 ## Introduction
