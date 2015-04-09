@@ -34,14 +34,21 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_TAG" ]; then
-    echo "Directory List:"
+    echo "BEFORE Directory List:"
     ls -lart
-    echo "Size of directories and files:"
+    echo "BEFORE Size of directories and files:"
     du -smc * | sort -n
-    echo "Size of filesystem:"
+    echo "BEFORE Size of filesystem:"
     df -k
     echo "Removing node_modules:"
     rm -rf node_modules
+    git stash
+    echo "AFTER Directory List:"
+    ls -lart
+    echo "AFTER Size of directories and files:"
+    du -smc * | sort -n
+    echo "AFTER Size of filesystem:"
+    df -k
   fi
 deploy:
   provider: npm
