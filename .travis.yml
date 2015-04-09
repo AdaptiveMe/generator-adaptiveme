@@ -23,12 +23,20 @@ after_success: |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     export PACKAGE_TAG=`node bin/version.js`
     echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
+    #if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
+    #  echo "Bump package version."
+    #  npm version patch
+    #  echo "Tag package version."
+    #  git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
+    #  git push origin --follow-tags
+    #fi
     if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
-      echo "Bump package version."
-      npm version patch
-      echo "Tag package version."
+      echo "Commit bumped file version."
+      grunt bump:patch
+    elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
+      echo "Tag current file version."
       git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-      git push origin --follow-tags
+      git push origin --tags
     fi
   fi
   #if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
