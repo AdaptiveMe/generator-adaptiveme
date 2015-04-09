@@ -2,7 +2,7 @@
 [![Build Status](https://travis-ci.org/AdaptiveMe/generator-adaptiveme.svg?branch=master)](https://travis-ci.org/AdaptiveMe/generator-adaptiveme)
 [![GitHub tag](https://img.shields.io/github/tag/AdaptiveMe/generator-adaptiveme.svg)](https://github.com/AdaptiveMe/generator-adaptiveme) 
 [![Adaptive Generator for Yeoman](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/generator-adaptiveme) 
-[![Adaptive Generator for Yeoman](https://img.shields.io/node/v/gh-badges.svg)](https://www.npmjs.com/package/generator-adaptiveme)
+[![Adaptive Generator for Yeoman](https://img.shields.io/node/v/gh-badges.svg)](https://www.npmjs.com/package/generator-adaptiveme) [![Dependency Status](https://david-dm.org/AdaptiveMe/generator-adaptiveme.svg)](https://david-dm.org/AdaptiveMe/generator-adaptiveme) [![devDependency Status](https://david-dm.org/AdaptiveMe/generator-adaptiveme/dev-status.svg)](https://david-dm.org/AdaptiveMe/generator-adaptiveme#info=devDependencies)
 [![License](https://img.shields.io/badge/license-apache%202-blue.svg)](https://raw.githubusercontent.com/AdaptiveMe/adaptive-arp-api/master/LICENSE) 
 [![Adaptive Generator for Yeoman](https://img.shields.io/badge/devtools-yeoman-yellow.svg)](https://github.com/AdaptiveMe/generator-adaptiveme) [![adaptive.me](https://img.shields.io/badge/adaptive-me-fdcb0e.svg)](http://adaptive.me)
 
