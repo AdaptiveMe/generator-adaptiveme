@@ -33,9 +33,9 @@
     "npm": "2.7.4"
   },
   "dependencies": {
-    "chalk": "^0.5.1",
-    "yeoman-generator": "^0.18.9",
-    "yosay": "^1.0.2"
+    "chalk": "^1.0.0",
+    "yeoman-generator": "^0.19.1",
+    "yosay": "^1.0.3"
   },
   "devDependencies": {
     "grunt": "^0.4.5",
