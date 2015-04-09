@@ -7,6 +7,7 @@ script:
 before_install:
 - npm install -g npm@2.7.6
 - npm -v
+- npm config set loglevel http
 - export HOME=`pwd`
 - mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
