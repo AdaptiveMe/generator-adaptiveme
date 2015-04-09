@@ -6,7 +6,7 @@
     // Rules are divided into sections from http://eslint.org/docs/rules/
 
     // Possible errors
-    "no-unused-vars":0,
+    "no-unused-vars": 0,
     "no-comma-dangle": 0,
     "no-console": 0,
     // Best practices
