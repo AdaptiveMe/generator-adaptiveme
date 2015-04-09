@@ -17,7 +17,9 @@ before_install:
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git checkout master
   fi
+
 - export CURRENT_TAG=`git describe --abbrev=0`
+
 after_success: |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     export PACKAGE_TAG=`node bin/version.js`
@@ -30,6 +32,12 @@ after_success: |-
       git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
       git push origin --tags
     fi
+  fi
+  if [ "$TRAVIS_TAG" ]; then
+    echo "Directory List:"
+    ls -lart
+    echo "Size of directories and files"
+    du -smc * | sort -n
   fi
 deploy:
   provider: npm

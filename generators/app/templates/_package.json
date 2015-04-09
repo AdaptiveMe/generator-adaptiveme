@@ -3,7 +3,9 @@
   "title": "<%= appname %>",
   "version": "0.0.0",
   "description": "Description for <%= appname %>",
-  "dependencies": {},
+  "dependencies": {
+    "npm-adaptiveme-nibble": "latest"
+  },
   "devDependencies": {
     "connect-livereload": "^0.5.3",
     "grunt": "^0.4.5",
