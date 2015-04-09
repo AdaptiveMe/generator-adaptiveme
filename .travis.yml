@@ -12,11 +12,14 @@ before_install:
 - git config --global user.name "carloslozano"
 - git config --global push.default simple
 - echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
-- git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
+- |-
+  git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     git checkout master
   fi
+
 - export CURRENT_TAG=`git describe --abbrev=0`
+
 after_success: |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     export PACKAGE_TAG=`node bin/version.js`
@@ -33,7 +36,7 @@ after_success: |-
   if [ "$TRAVIS_TAG" ]; then
     echo "Directory List:"
     ls -lart
-    echo "Size of directories and files:"
+    echo "Size of directories and files"
     du -smc * | sort -n
   fi
 deploy:
