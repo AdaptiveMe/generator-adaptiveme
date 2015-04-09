@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:AdaptiveMe/generator-adaptiveme.git"
+    "url": "https://github.com/AdaptiveMe/generator-adaptiveme"
   },
   "keywords": [
     "yeoman-generator",
