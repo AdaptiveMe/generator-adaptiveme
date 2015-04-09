@@ -33,11 +33,6 @@ after_success: |-
       git push origin --tags
     fi
   fi
-  #if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  #  echo "QuirksMode Style."
-  #  echo $PORK_MODE > ~/.npmrc
-  #  npm publish .
-  #fi
 deploy:
   provider: npm
   email: carlos@adaptive.me
