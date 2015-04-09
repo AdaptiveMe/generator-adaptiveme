@@ -15,21 +15,21 @@ before_install:
 - |-
   git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  git checkout master
+    git checkout master
   fi
 - export CURRENT_TAG=`git describe --abbrev=0`
 after_success: |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-  export PACKAGE_TAG=`node bin/version.js`
-  echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
-  if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
-  echo "Commit bumped file version."
-  grunt bump:patch
-  elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
-  echo "Tag current file version."
-  git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-  git push origin --tags
-  fi
+    export PACKAGE_TAG=`node bin/version.js`
+    echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
+    if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
+      echo "Commit bumped file version."
+      grunt bump:patch
+    elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
+      echo "Tag current file version."
+      git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
+      git push origin --tags
+    fi
   fi
 deploy:
   provider: npm
