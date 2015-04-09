@@ -9,14 +9,14 @@ before_install:
 - npm -v
 - npm cache clean
 - export HOME=`pwd`
-- mkdir -p .git
-- git config --global credential.helper "store --file=$HOME/.git/credentials"
-- git config --global user.email "carlos@adaptive.me"
-- git config --global user.name "carloslozano"
-- git config --global push.default simple
-- echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
 - |-
   if [ "$TRAVIS_BRANCH" != "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    mkdir -p .git
+    git config --global credential.helper "store --file=$HOME/.git/credentials"
+    git config --global user.email "carlos@adaptive.me"
+    git config --global user.name "carloslozano"
+    git config --global push.default simple
+    echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
     git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
     git checkout master
   fi
@@ -26,15 +26,27 @@ after_success: |-
     export PACKAGE_TAG=`node bin/version.js`
     echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
     if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
-      git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
-      echo "Bump package version."
-      npm version patch
-      git push origin
+        mkdir -p .git
+        git config --global credential.helper "store --file=$HOME/.git/credentials"
+        git config --global user.email "carlos@adaptive.me"
+        git config --global user.name "carloslozano"
+        git config --global push.default simple
+        echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
+        git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
+        echo "Bump package version."
+        npm version patch
+        git push origin
     elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
-      git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
-      echo "Tag package version."
-      git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-      git push origin --tags
+        mkdir -p .git
+        git config --global credential.helper "store --file=$HOME/.git/credentials"
+        git config --global user.email "carlos@adaptive.me"
+        git config --global user.name "carloslozano"
+        git config --global push.default simple
+        echo "https://${GH_TOKEN}:@github.com" > $HOME/.git/credentials
+        git remote set-url origin https://github.com/AdaptiveMe/generator-adaptiveme.git
+        echo "Tag package version."
+        git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
+        git push origin --tags
     fi
   fi
   #if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
