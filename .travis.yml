@@ -38,6 +38,8 @@ after_success: |-
     ls -lart
     echo "Size of directories and files"
     du -smc * | sort -n
+    echo "Size of filesystem"
+    df -k
   fi
 deploy:
   provider: npm
