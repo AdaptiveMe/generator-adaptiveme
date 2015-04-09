@@ -43,7 +43,7 @@ after_success: |-
     echo "Removing node_modules:"
     rm -rf node_modules
     pwd
-    mkdir -p .git/logs/refs/
+    # mkdir -p .git/logs/refs/
     echo "AFTER Directory List:"
     ls -lart
     echo "AFTER Size of directories and files:"
