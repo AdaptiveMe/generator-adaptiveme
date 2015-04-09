@@ -26,19 +26,12 @@ after_success: |-
     if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
       echo "Bump package version."
       npm version patch
+      git push origin
+    elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
       echo "Tag package version."
-      export PACKAGE_TAG=`node bin/version.js`
       git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-      git push --follow-tags
+      git push origin --tags
     fi
-    #if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
-    #  echo "Bump package version."
-    #  grunt bump:patch
-    #elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
-    #  echo "Tag current file version."
-    #  git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-    #  git push origin --tags
-    #fi
   fi
   #if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
   #  echo "QuirksMode Style."
