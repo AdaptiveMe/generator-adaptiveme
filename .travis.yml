@@ -31,8 +31,13 @@ after_success: |-
       git push origin --tags
     fi
   fi
-  if [ "$TRAVIS_TAG" ]; then
-    echo "I Use Da Chrome"
+  if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    npm adduser <<!
+    $NPM_USERNAME
+    $NPM_PASSWORD
+    $NPM_EMAIL
+    !
+    npm publish
   fi
 deploy:
   provider: npm
