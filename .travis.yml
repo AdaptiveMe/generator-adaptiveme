@@ -44,7 +44,6 @@ after_success: |-
     rm -rf node_modules
     pwd
     mkdir -p .git/logs/refs/
-    chmod 777 -R .git/logs/refs/
     echo "AFTER Directory List:"
     ls -lart
     echo "AFTER Size of directories and files:"
