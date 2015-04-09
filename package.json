@@ -1,6 +1,6 @@
 {
   "name": "generator-adaptiveme",
-  "version": "2.0.15",
+  "version": "2.0.16",
   "description": "Adaptive.me app generator - Yeoman Generator for Adaptive Runtime Platform.",
   "preferGlobal": "true",
   "scripts": {
