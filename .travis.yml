@@ -24,19 +24,18 @@ after_success: |-
     export PACKAGE_TAG=`node bin/version.js`
     echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
     if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
-      echo "Commit bumped file version."
+      echo "Bump package version."
       npm version patch
-      git push origin
-      echo "Tag current file version."
+      echo "Tag package version."
       git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
-      git push origin --tags
+      git push origin --follow-tags
     fi
   fi
-  if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    echo "QuirksMode Style."
-    echo $PORK_MODE > ~/.npmrc
-    npm publish .
-  fi
+  #if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+  #  echo "QuirksMode Style."
+  #  echo $PORK_MODE > ~/.npmrc
+  #  npm publish .
+  #fi
 deploy:
   provider: npm
   email: carlos@adaptive.me
