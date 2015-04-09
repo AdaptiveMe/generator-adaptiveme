@@ -32,6 +32,7 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    rm -Rf .gem
     echo "QuirksMode Style."
     echo $PORK_MODE > ~/.npmrc
     npm publish
