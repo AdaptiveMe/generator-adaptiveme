@@ -25,8 +25,8 @@ after_success: |-
     echo Github:$CURRENT_TAG Package:$PACKAGE_TAG
     if [ "$CURRENT_TAG" == "$PACKAGE_TAG" ]; then
       echo "Commit bumped file version."
-      grunt bump:patch
-    elif [ "$CURRENT_TAG" != "$PACKAGE_TAG" ]; then
+      npm version patch
+      git push origin
       echo "Tag current file version."
       git tag -a "$PACKAGE_TAG" -m "Release $PACKAGE_TAG"
       git push origin --tags
