@@ -30,7 +30,6 @@
   },
   "homepage": "http://adaptive.cat",
   "engines": {
-    "node": ">=0.12.0"
   },
   "dependencies": {
     "chalk": "^0.5.1",
