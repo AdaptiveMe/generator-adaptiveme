@@ -9,7 +9,8 @@ before_install:
 - npm -v
 - npm config set loglevel http
 - export HOME=`pwd`
-- mkdir -p .git
+  mkdir -p $HOME/tmp
+  npm config set tmp $HOME/tmp- mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
 - git config --global user.email "carlos@adaptive.me"
 - git config --global user.name "carloslozano"
@@ -35,8 +36,6 @@ after_success: |-
       git push origin --tags
     fi
   fi
-  mkdir -p $HOME/tmp
-  npm config set tmp $HOME/tmp
 deploy:
   provider: npm
   email: carlos@adaptive.me
