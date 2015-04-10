@@ -1,12 +1,12 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
 - 0.12.2
 script:
-- npm install -g
+- sudo npm install -g
 - npm test
 before_install:
-- npm install -g npm@2.7.6
+- sudo npm install -g npm@2.7.6
 - export HOME=`pwd`
 - mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
@@ -37,9 +37,9 @@ after_success: |-
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "QuirksMode Style."
     echo $PORKMODE > ~/.npmrc
-    #npm config set loglevel verbose
+    npm config set loglevel verbose
     npm config set ignore-scripts true
-    npm publish generator-adaptiveme
+    npm publish 
   fi
 before_deploy:
 - df -k
