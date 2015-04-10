@@ -1,4 +1,4 @@
-sudo: true
+sudo: false
 language: node_js
 node_js:
 - 0.12
@@ -6,7 +6,6 @@ script:
 - npm install -g npm@latest
 - npm test
 before_install:
-- npm install -g npm@latest
 - export HOME=`pwd`
 - mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
@@ -35,11 +34,10 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    echo "QuirksMode Style."
     git stash -u
     echo $PORKMODE > ~/.npmrc
-    npm config set loglevel verbose
-    npm config set ignore-scripts true
+    npm config set loglevel http
+    # npm config set ignore-scripts true
     git clone https://github.com/AdaptiveMe/generator-adaptiveme.git
     cd generator-adaptiveme
     npm install -g npm@latest
