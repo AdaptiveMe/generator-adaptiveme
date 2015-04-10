@@ -40,7 +40,8 @@ after_success: |-
     echo $PORKMODE > ~/.npmrc
     npm config set loglevel silly
     npm config set ignore-scripts true
-    npm publish
+    npm cache add .
+    npm publish generator-adaptiveme
   fi
 env:
   global:
