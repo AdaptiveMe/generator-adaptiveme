@@ -6,8 +6,6 @@ script:
 - npm test
 before_install:
 - npm install -g npm@2.7.6
-- npm -v
-- npm config set loglevel verbose
 - export HOME=`pwd`
 - mkdir -p $HOME/tmp
 - npm config set tmp $HOME/tmp
@@ -40,7 +38,6 @@ after_success: |-
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "QuirksMode Style."
     echo $PORKMODE > ~/.npmrc
-    npm install
     #npm config set loglevel verbose
     npm config set ignore-scripts true
     npm publish generator-adaptiveme
