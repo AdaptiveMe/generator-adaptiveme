@@ -3,8 +3,11 @@
   "title": "<%= appname %>",
   "version": "0.0.0",
   "description": "Description for <%= appname %>",
+  "scripts": {
+    "install": "node bin/nibble-installer.js"
+  },
   "dependencies": {
-    "npm-adaptiveme-nibble": "latest"
+    "package-script": "0.0.8"
   },
   "devDependencies": {
     "connect-livereload": "^0.5.3",

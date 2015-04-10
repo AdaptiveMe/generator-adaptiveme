@@ -177,6 +177,10 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
     this.destinationPath('Gruntfile.js'),
     {typescript: param_typescript}
   );
+
+  // script for installing nibble globally
+  this.mkdir('bin/');
+  this.copy('bin/nibble-installer.js', 'bin/nibble-installer.js');
 };
 
 /**
