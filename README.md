@@ -12,7 +12,50 @@
 
 ### About This Project
 
-Todo :smile:
+Adaptive App Generator is an scafolding tool for generating HTML5 applications ready for the Adaptive Runtime Platform.
+
+## Use It
+
+### Installation
+
+* You should NodeJS installed on your machine before proceeding with the installation. If you don't have it, please download it from [here](https://nodejs.org/download/) for your platform. 
+	* If you don't know whether you have it installed, open up a ```terminal```or ```cmd prompt``` and issue the following command ```node -v```.
+	* The above command should respond with at least the following NodeJS version ```v0.12.0```.
+* Install the tools for running the generator and the generator
+	* On **Windows** from ```cmd prompt```:
+	```npm install -g yo bower grunt-cli generator-adaptiveme```
+	* On **OS X** and **Linux** from ```terminal```:
+	```sudo npm install -g yo bower grunt-cli generator-adaptiveme```
+* The installer will download everything you need to run Adaptive App Generator.
+	
+### Running
+* On **Windows** from ```cmd prompt```:
+```yo adaptiveme```
+* On **OS X** and **Linux** from ```terminal```:
+```sudo yo adaptiveme```
+* When you run the generator, the program will launch some prompt in order to configure your application.
+	* ```What is the base name of your application?``` Base name of the application, by default is the running folder's name
+	* ```What version of Adaptive library want to use?``` Select the version of ARP you want to use. By default is the latest
+	* ```Do you want to add Typescript support to the project?``` Select if you want Typescript support for the application. Highly recomended
+	* ```Select one boilerplate to initialize the application:```
+		* ```HTML5 Boilerplate``` Empty application with some HTML5 features (CSS normalization, Modernizr) - http://demo.html5boilerplate.com/
+		* ```Mobile HTML5 Boilerplate``` Simple Mobile Application Boilerplate (jQuery, CSS normalization, Mobile Optimizations) - https://html5boilerplate.com/mobile/
+		* ```Initializr Responsive``` Responsive Boilerplate for creating multi-device applications (CSS normalization, Modernizr) - http://www.initializr.com/try
+		* ```Initializr Boostrap```Boilerplate template for creating applications with boostrap (Boostrap) - http://getbootstrap.com/examples/jumbotron/
+* Once the generation is finished, you can use some features for development:
+	* ```grunt watch``` This task will open for you a watcher for validating JS and CSS. Also this task opens a watcher for the typescript files.
+	* ```grunt nibble``` Runs a nibble emulator on the source folder in order to emulate your application on a device
+	* ```grunt test``` Execute Javascript and CSS testing for your application
+	* ```grunt dist``` Prepares your application for distribution. The output result will be on **dist** folder
+
+* Please report issues/wants/needs [here](https://github.com/AdaptiveMe/generator-adaptiveme/issues) clearly stating your platform and screenshots (whenever possible).
+
+### Updating
+* Updating your ```generator-adaptiveme``` installation.
+	* On **Windows** from ```cmd prompt```:
+	```npm up generator-adaptiveme -g```   	
+	* On **OS X** and **Linux** from ```terminal```:
+	```sudo npm up generator-adaptiveme -g```
 
 ### About Adaptive Runtime Platform
 
