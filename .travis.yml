@@ -35,6 +35,8 @@ after_success: |-
       git push origin --tags
     fi
   fi
+  mkdir -p $HOME/tmp
+  npm config set tmp $HOME/tmp
 deploy:
   provider: npm
   email: carlos@adaptive.me
