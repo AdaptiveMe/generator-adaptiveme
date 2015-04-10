@@ -7,7 +7,7 @@ script:
 before_install:
 - npm install -g npm@2.7.6
 - npm -v
-- npm config set loglevel http
+- npm config set loglevel verbose
 - export HOME=`pwd`
 - mkdir -p $HOME/tmp
 - npm config set tmp $HOME/tmp
