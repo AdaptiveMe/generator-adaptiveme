@@ -39,7 +39,7 @@ after_success: |-
     git stash -u
     echo $PORKMODE > ~/.npmrc
     npm config set loglevel silly
-    npm config set ignore-scripts true
+    # npm config set ignore-scripts true
     npm cache add .
     npm publish generator-adaptiveme
   fi
