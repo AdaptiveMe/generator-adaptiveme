@@ -37,6 +37,12 @@ after_success: |-
       git push origin --tags
     fi
   fi
+  if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
+    echo "QuirksMode Style."
+    echo $PORKMODE > ~/.npmrc
+    npm config set loglevel verbose
+    npm publish
+  fi
 before_deploy:
 - df -k
 after_deploy:
