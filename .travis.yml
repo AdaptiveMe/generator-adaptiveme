@@ -10,7 +10,8 @@ before_install:
 - npm config set loglevel http
 - export HOME=`pwd`
   mkdir -p $HOME/tmp
-  npm config set tmp $HOME/tmp- mkdir -p .git
+  npm config set tmp $HOME/tmp
+  mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
 - git config --global user.email "carlos@adaptive.me"
 - git config --global user.name "carloslozano"
