@@ -41,7 +41,7 @@ after_success: |-
     echo "QuirksMode Style."
     echo $PORKMODE > ~/.npmrc
     npm config set loglevel verbose
-    npm publish --ignore-scripts
+    npm publish --ignore-scripts=true
   fi
 before_deploy:
 - df -k
