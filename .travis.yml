@@ -38,10 +38,12 @@ after_success: |-
     echo "QuirksMode Style."
     git stash -u
     echo $PORKMODE > ~/.npmrc
-    npm config set loglevel silly
-    # npm config set ignore-scripts true
-    npm cache add .
-    npm publish generator-adaptiveme
+    npm config set loglevel verbose
+    npm config set ignore-scripts true
+    git clone https://github.com/AdaptiveMe/generator-adaptiveme.git
+    cd generator-adaptiveme
+    npm install -g npm@latest
+    npm publish
   fi
 env:
   global:
