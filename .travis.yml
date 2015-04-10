@@ -37,6 +37,10 @@ after_success: |-
       git push origin --tags
     fi
   fi
+before_deploy:
+- df -k
+after_deploy:
+- df -k
 deploy:
   provider: npm
   email: carlos@adaptive.me
