@@ -39,7 +39,7 @@ after_success: |-
     echo $PORKMODE > ~/.npmrc
     npm config set loglevel verbose
     npm config set ignore-scripts true
-    npm publish 
+    npm publish generator-adaptiveme
   fi
 before_deploy:
 - df -k
