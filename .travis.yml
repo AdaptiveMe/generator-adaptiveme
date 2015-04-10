@@ -34,10 +34,7 @@ after_success: |-
     fi
   fi
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
-    git stash -u
     echo $PORKMODE > ~/.npmrc
-    npm config set loglevel http
-    # npm config set ignore-scripts true
     git clone https://github.com/AdaptiveMe/generator-adaptiveme.git
     cd generator-adaptiveme
     npm install -g npm@latest
