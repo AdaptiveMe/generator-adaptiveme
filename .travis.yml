@@ -38,7 +38,7 @@ after_success: |-
     echo "QuirksMode Style."
     git stash -u
     echo $PORKMODE > ~/.npmrc
-    npm config set loglevel verbose
+    npm config set loglevel silly
     npm config set ignore-scripts true
     npm publish
   fi
