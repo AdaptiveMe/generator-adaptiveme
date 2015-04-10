@@ -40,7 +40,7 @@ after_success: |-
 before_deploy:
 - df -k
 after_deploy:
-- df -k
+- df -k 
 deploy:
   provider: npm
   email: carlos@adaptive.me
