@@ -1,12 +1,12 @@
 sudo: true
 language: node_js
 node_js:
-- 0.12.2
+- 0.12
 script:
-- npm install -g npm@2.7.6
+- npm install -g npm@latest
 - npm test
 before_install:
-- npm install -g npm@2.7.6
+- npm install -g npm@latest
 - export HOME=`pwd`
 - mkdir -p .git
 - git config --global credential.helper "store --file=$HOME/.git/credentials"
@@ -42,10 +42,6 @@ after_success: |-
     npm config set ignore-scripts true
     npm publish
   fi
-before_deploy:
-- df -k
-after_deploy:
-- df -k 
 env:
   global:
     secure: ScgIsLlESsEgDWBcdnrXOfyZ8vvbfkegz3WG69DJsNHKUg9dC/aQ8zkrI6u8sLbSWYEzagLOjfFSsNndXRmIMPBFi30m4zVuZl7FgJ0d9dTcFwf0ol7wL0/uwulTrS2/ieHDXyz6kKg295kGVX7ixkziroOVfggKSOX8ZpIBRJY=
