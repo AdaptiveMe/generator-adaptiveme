@@ -36,10 +36,11 @@ after_success: |-
   fi
   if [ "$TRAVIS_BRANCH" == "$TRAVIS_TAG" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "QuirksMode Style."
+    git stash -u
     echo $PORKMODE > ~/.npmrc
     npm config set loglevel verbose
     npm config set ignore-scripts true
-    npm publish generator-adaptiveme
+    npm publish
   fi
 before_deploy:
 - df -k
