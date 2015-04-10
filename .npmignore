@@ -1,0 +1,14 @@
+node_modules/
+.bowerrc
+.gitignore
+.npmignore
+.travis.yml
+.git
+.jscsrc
+.eslintignore
+.editorconfig
+.eslintrc
+.DS_Store
+bower.json
+npm-debug.log
+
