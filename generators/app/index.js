@@ -403,14 +403,7 @@ AdaptiveGenerator.prototype.conflicts = function conflicts() {
  */
 AdaptiveGenerator.prototype.install = function installation() {
   this.log(chalk.green('[generator-adaptive] Installing dependencies... ' + install));
-  //this.installDependencies({skipInstall: !install});
-
-  this.installDependencies({
-    skipInstall: !install,
-    callback: function () {
-    }.bind(this)
-  });
-
+  this.installDependencies({skipInstall: !install});
 };
 
 /**
@@ -420,7 +413,6 @@ AdaptiveGenerator.prototype.end = function end() {
 
   if (install && server) {
     // Execute grunt task
-    //this.spawnCommand('grunt', ['test', 'nibble']);
-    this.spawnCommand('grunt', ['test']);
+    this.spawnCommand('grunt', ['test', 'nibble']);
   }
 };

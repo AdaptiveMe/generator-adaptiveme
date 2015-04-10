@@ -43,14 +43,13 @@ module.exports = function (grunt) {
   // Individual configurations for all the tasks
   grunt.initConfig({
 
-      < % if (typescript) { %>
-      typescript: {
-        base: { src: ['src/js/**/*.ts'], dest: 'src/js/', options:
-          { declaration: false, sourceMap: false, module: 'commonjs', target: 'es5', basePath: 'src/js/',}
-        }
-      },
-      <% } %>
-
+    <% if (typescript) { %>typescript: {
+      base: {
+        src: ['src/js/**/*.ts'],
+          dest: 'src/js/',
+          options: { declaration: false, sourceMap: false, module: 'commonjs', target: 'es5', basePath: 'src/js/', }
+      }
+    },<% } %>
 
       // Javascript validator. Skip files in '.jshintignore'
       jshint: {
