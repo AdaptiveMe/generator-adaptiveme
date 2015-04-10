@@ -30,7 +30,7 @@
   "homepage": "http://adaptive.cat",
   "engines": {
     "node": ">=0.12",
-    "npm": "2.7.4"
+    "npm": ">=2.7.4"
   },
   "dependencies": {
     "chalk": "^1.0.0",

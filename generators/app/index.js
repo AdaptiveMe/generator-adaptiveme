@@ -223,29 +223,13 @@ AdaptiveGenerator.prototype.writing = function writing() {
   this.mkdir(srcDir);
   this.mkdir(distDir);
 
-  /* fnva: 150305 - Add boilerplate support
-   this.mkdir(srcDir + cssDir);
-   this.mkdir(srcDir + jsDir);
-   this.mkdir(srcDir + imgDir);
-
-   this.template(srcDir + 'index.html', srcDir + 'index.html', this, {});
-   if (param_typescript) {
-   this.template(srcDir + jsDir + 'main.ts', srcDir + jsDir + 'main.ts', this, {});
-   } else {
-   this.template(srcDir + jsDir + 'main.js', srcDir + jsDir + 'main.js', this, {});
-   }
-   this.template(srcDir + cssDir + 'reset.css', srcDir + cssDir + 'reset.css', this, {});
-   this.template(srcDir + cssDir + 'style.css', srcDir + cssDir + 'style.css', this, {});
-   */
-
   var boilerplateSrc = '';
 
   switch (param_boilerplate) {
     case html5:
 
-      /*
-       HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
-       */
+       //HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
+
 
       boilerplateSrc = 'html5/';
 
@@ -271,9 +255,8 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     case mobile:
 
-      /*
-       MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
-       */
+       //MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
+
 
       boilerplateSrc = 'mobile/';
 
@@ -301,9 +284,9 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     case responsive:
 
-      /*
-       RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
-       */
+
+       //RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
+
 
       boilerplateSrc = 'responsive/';
 
@@ -329,9 +312,9 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     case boostrap:
 
-      /*
-       BOOSTRAP Boilerplate
-       */
+
+       //BOOSTRAP Boilerplate
+
 
       boilerplateSrc = 'boostrap/';
 
@@ -363,9 +346,9 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     default:
 
-      /*
-       NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
-       */
+
+      // NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
+
 
       boilerplateSrc = 'none/';
 

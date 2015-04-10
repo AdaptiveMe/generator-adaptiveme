@@ -6,13 +6,13 @@ module.exports = function (grunt) {
   grunt.initConfig({
     eslint: {
       all: {
-        src: ['generators/app/index.js']
+        src: ['generators/app/index.js', 'generators/app/templates/bin/nibble-installer.js', 'generators/app/templates/Gruntfile.js']
       }
     },
 
     jscs: {
       all: {
-        src: ['Gruntfile.js', 'generators/app/index.js'],
+        src: ['Gruntfile.js', 'generators/app/index.js', 'generators/app/templates/bin/nibble-installer.js', 'generators/app/templates/Gruntfile.js'],
         options: {config: '.jscsrc'}
       }
     },
