@@ -28,7 +28,6 @@
     "grunt-open": "^0.2.3",
     "grunt-usemin": "^3.0.0",
     "grunt-text-replace": "^0.4.0",
-    "grunt-typescript": "^0.6.1",
-    "typescript": "^1.4.1"
+    "grunt-typescript": "^0.6.1"
   }
 }
