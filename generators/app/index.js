@@ -33,18 +33,30 @@
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var util = require('util');
+var path = require('path');
 var install = true;
 var server = true;
 var param_app_name = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
+var param_platforms = ['ios', 'android', 'windows'];
 
 // Boilerplate options
 var html5 = 'HTML5 Boilerplate';
 var mobile = 'Mobile HTML5 Boilerplate';
 var responsive = 'Initializr Responsive';
 var boostrap = 'Initializr Boostrap';
+
+// Platform options
+var platforms = {};
+platforms[0] = 'ios';
+platforms[1] = 'android';
+platforms[2] = 'windows';
+/*platforms[3] = "blackberry";
+ platforms[4] = "mobileweb";
+ platforms[5] = "tizen";
+ platforms[6] = "osx";*/
 
 module.exports = AdaptiveGenerator;
 
@@ -67,6 +79,9 @@ function AdaptiveGenerator(args, options, config) {
   });
   this.argument('arg4', {
     type: String, required: false, optional: true, desc: 'Boilerplate for initialize application'
+  });
+  this.argument('arg5', {
+    type: Array, required: false, optional: true, desc: 'Array of platforms selected'
   });
 
   // options
@@ -142,10 +157,21 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
         'None'
       ],
       default: param_boilerplate
+    }, {
+      type: 'checkbox',
+      name: 'param_platforms',
+      message: 'Select the supported platforms:',
+      choices: [
+        platforms[0],
+        platforms[1],
+        platforms[2]
+      ],
+      default: param_platforms
     }], function (answers) {
 
       param_typescript = answers.param_typescript;
       param_boilerplate = answers.param_boilerplate;
+      param_platforms = answers.param_platforms;
 
       done();
 
@@ -156,6 +182,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
     param_adaptive_version = this.arg2;
     param_typescript = this.arg3;
     param_boilerplate = this.arg4;
+    param_platforms = (this.arg5 + '').split(',');
   }
 };
 
@@ -198,6 +225,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
   var srcDir = 'src/';
   var cfgDir = 'config/';
   var distDir = 'dist/';
+  var assetsDir = 'assets/';
 
   var defDir = 'definitions/';
   var valDir = 'validators/';
@@ -223,13 +251,22 @@ AdaptiveGenerator.prototype.writing = function writing() {
   this.mkdir(srcDir);
   this.mkdir(distDir);
 
+  // assets
+  this.mkdir(assetsDir);
+  for (var i = 0; i < param_platforms.length; i++) {
+    var dir = assetsDir + param_platforms[i] + path.sep;
+    this.directory(dir, dir, true);
+  }
+
+  // TODO: remove copy file-to-file and use this.directory(dir, dir, true); instead
+  // TODO: simplify all the following code
+
   var boilerplateSrc = '';
 
   switch (param_boilerplate) {
     case html5:
 
-       //HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
-
+      //HTML5 Boilerplate. Boilerplate with the minimum requirement for HTML5 development
 
       boilerplateSrc = 'html5/';
 
@@ -255,7 +292,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     case mobile:
 
-       //MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
+      //MOBILE Boilerplate. Like HTML5 Boilerplate plus some mobile features
 
 
       boilerplateSrc = 'mobile/';
@@ -285,7 +322,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     case responsive:
 
 
-       //RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
+      //RESPONSIVE Boilerplate. Boilerplate for responsive multi-platform purposes
 
 
       boilerplateSrc = 'responsive/';
@@ -313,7 +350,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
     case boostrap:
 
 
-       //BOOSTRAP Boilerplate
+      //BOOSTRAP Boilerplate
 
 
       boilerplateSrc = 'boostrap/';
@@ -348,7 +385,6 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
 
       // NONE BOILERPLATE. Basic index.html with adaptive integration and typescript support (optional)
-
 
       boilerplateSrc = 'none/';
 
