@@ -50,6 +50,10 @@ Adaptive App Generator is an scafolding tool for generating HTML5 applications r
 		* **Mobile HTML5 Boilerplate** Simple Mobile Application Boilerplate (jQuery, CSS normalization, Mobile Optimizations) - https://html5boilerplate.com/mobile/
 		* **Initializr Responsive** Responsive Boilerplate for creating multi-device applications (CSS normalization, Modernizr) - http://www.initializr.com/try
 		* **Initializr Boostrap** Boilerplate template for creating applications with boostrap (Boostrap) - http://getbootstrap.com/examples/jumbotron/
+	* **Select the supported platforms:** (multiselect) Select all the platforms for configuring the graphical assets to copy
+		* **ios**
+		* **android**
+		* **windows**
 * Once the generation is finished, you can use some features for development:
 	* ```grunt watch``` This task will open for you a watcher for validating JS and CSS. Also this task opens a watcher for the typescript files.
 	* ```grunt nibble``` Runs a nibble emulator on the source folder in order to emulate your application on a device
