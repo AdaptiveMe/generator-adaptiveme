@@ -12,7 +12,7 @@
 
 ### About This Project
 
-Adaptive App Generator is an scafolding tool for generating HTML5 applications ready for the Adaptive Runtime Platform.
+Adaptive App Generator is an scaffolding tool for generating HTML5 applications ready for the Adaptive Runtime Platform.
 
 ## Use It
 
