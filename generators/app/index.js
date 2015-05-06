@@ -113,7 +113,7 @@ AdaptiveGenerator.prototype.initializing = function initializing() {
 AdaptiveGenerator.prototype.prompting = function prompting() {
 
   // Check if the application_name is defined
-  if (typeof this.arg1 == 'undefined' || typeof this.arg2 == 'undefined' || typeof this.arg3 == 'undefined') {
+  if (typeof this.arg1 == 'undefined' || typeof this.arg2 == 'undefined' || typeof this.arg3 == 'undefined' || typeof this.arg4 == 'undefined' || typeof this.arg5 == 'undefined') {
     var done = this.async();
     this.prompt([{
       type: 'input',
@@ -169,7 +169,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
       default: param_platforms
     }], function (answers) {
 
-      param_typescript = answers.param_typescript;
+      param_typescript = JSON.parse(answers.param_typescript);
       param_boilerplate = answers.param_boilerplate;
       param_platforms = answers.param_platforms;
 
@@ -180,7 +180,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
   } else {
     param_app_name = this.arg1;
     param_adaptive_version = this.arg2;
-    param_typescript = this.arg3;
+    param_typescript = JSON.parse(this.arg3);
     param_boilerplate = this.arg4;
     param_platforms = (this.arg5 + '').split(',');
   }
