@@ -24,11 +24,15 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 * Install the tools for running the generator and the generator
 	* On **Windows** from cmd prompt:
 	
-	  ```  npm install -g yo bower grunt-cli generator-adaptiveme```
+        ```  
+        npm install -g yo bower grunt-cli generator-adaptiveme
+        ```
 
 	* On **OS X** and **Linux** from terminal:
 	
-	  ```  sudo npm install -g yo bower grunt-cli generator-adaptiveme```
+        ```
+        sudo npm install -g yo bower grunt-cli generator-adaptiveme
+        ```
 
 * The installer will download everything you need to run Adaptive App Generator.
 	
@@ -38,14 +42,16 @@ To create an application you shoul create a working folder where the generate wi
 
 * On **Windows** from cmd prompt inside the working folder:
 
-  ```  yo adaptiveme```
+  ```
+  yo adaptiveme
+  ```
 
 * On **OS X** and **Linux** from terminal inside the working folder:
 
   ```
-    yo adaptiveme --skip-install
-    sudo npm install
-    bower install
+  yo adaptiveme --skip-install
+  sudo npm install
+  bower install
   ```
   _(*) You should run the command separatelly because during the npm libraries installation the [nibble](https://github.com/AdaptiveMe/npm-adaptiveme-nibble) is installed globally on your computer to simplify the development._
 
