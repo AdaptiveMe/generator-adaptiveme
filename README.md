@@ -33,13 +33,21 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 * The installer will download everything you need to run Adaptive App Generator.
 	
 ### Running
-* On **Windows** from cmd prompt:
+
+To create an application you shoul create a working folder where the generate will download all the necessary files for starting the application.
+
+* On **Windows** from cmd prompt inside the working folder:
 
   ```  yo adaptiveme```
 
-* On **OS X** and **Linux** from terminal:
+* On **OS X** and **Linux** from terminal inside the working folder:
 
-  ```  sudo yo adaptiveme```
+  ```
+    yo adaptiveme --skip-install
+    sudo npm install
+    bower install
+  ```
+  _(*) You should run the command separatelly because during the npm libraries installation the [nibble](https://github.com/AdaptiveMe/npm-adaptiveme-nibble) is installed globally on your computer to simplify the development._
 
 * When you run the generator, the program will launch some prompt in order to configure your application.
 	* **What is the base name of your application?** Base name of the application, by default is the running folder's name
