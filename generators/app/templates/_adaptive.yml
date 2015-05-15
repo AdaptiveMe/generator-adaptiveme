@@ -1,0 +1,7 @@
+app.name:<%= app_name %>
+
+adaptive.version:<%= adaptive_version %>
+
+target.ios:<%= target_ios %>
+target.android:<%= target_android %>
+target.windows:<%= target_windows %>
