@@ -22,17 +22,10 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 	* If you don't know whether you have it installed, open up a ```terminal```or ```cmd prompt``` and issue the following command ```node -v```.
 	* The above command should respond with at least the following NodeJS version ```v0.12.0```.
 * Install the tools for running the generator and the generator
-	* On **Windows** from cmd prompt:
-	
-        ```  
-        npm install -g yo bower grunt-cli generator-adaptiveme
-        ```
 
-	* On **OS X** and **Linux** from terminal:
-	
-        ```
-        sudo npm install -g yo bower grunt-cli generator-adaptiveme
-        ```
+  ```  
+  [sudo] npm install -g yo bower grunt-cli generator-adaptiveme
+  ```
 
 * The installer will download everything you need to run Adaptive App Generator.
 	
@@ -40,20 +33,9 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 
 To create an application you shoul create a working folder where the generate will download all the necessary files for starting the application.
 
-* On **Windows** from cmd prompt inside the working folder:
-
   ```
   yo adaptiveme
   ```
-
-* On **OS X** and **Linux** from terminal inside the working folder:
-
-  ```
-  yo adaptiveme --skip-install
-  sudo npm install
-  bower install
-  ```
-  _(*) You should run the command separatelly because during the npm libraries installation the [nibble](https://github.com/AdaptiveMe/npm-adaptiveme-nibble) is installed globally on your computer to simplify the development._
 
 * When you run the generator, the program will launch some prompt in order to configure your application.
 	* **What is the base name of your application?** Base name of the application, by default is the running folder's name
@@ -77,11 +59,11 @@ To create an application you shoul create a working folder where the generate wi
 * Please report issues/wants/needs [here](https://github.com/AdaptiveMe/generator-adaptiveme/issues) clearly stating your platform and screenshots (whenever possible).
 
 ### Updating
-* Updating your ```generator-adaptiveme``` installation.
-	* On **Windows** from ```cmd prompt```:
-	```npm up generator-adaptiveme -g```   	
-	* On **OS X** and **Linux** from ```terminal```:
-	```sudo npm up generator-adaptiveme -g```
+* Updating your **generator-adaptiveme** installation.
+
+  ```
+  [sudo] npm up generator-adaptiveme -g
+  ```
 
 ### About Adaptive Runtime Platform
 
