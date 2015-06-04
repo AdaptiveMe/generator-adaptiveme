@@ -29,18 +29,31 @@
  * =====================================================================================================================
  */
 
+/**
+ * This script runs the adaptive app generator. The script can be runned with
+ * parameters or using the interactive mode.
+ */
+
 'use strict';
-var yeoman = require('yeoman-generator');
-var chalk = require('chalk');
-var util = require('util');
-var path = require('path');
+
+var yeoman = require('yeoman-generator'),
+    exit = require('exit'),
+    chalk = require('chalk'),
+    util = require('util'),
+    path = require('path'),
+    mkdirp = require('mkdirp');
+
+// Options default
 var install = true;
 var server = true;
+
+// Parameters default
 var param_app_name = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
 var param_platforms = ['ios', 'android', 'windows'];
+var numberOfParams = 5;
 
 // Boilerplate options
 var html5 = 'HTML5 Boilerplate';
@@ -53,10 +66,6 @@ var platforms = {};
 platforms[0] = 'ios';
 platforms[1] = 'android';
 platforms[2] = 'windows';
-/*platforms[3] = "blackberry";
- platforms[4] = "mobileweb";
- platforms[5] = "tizen";
- platforms[6] = "osx";*/
 
 module.exports = AdaptiveGenerator;
 
@@ -112,8 +121,12 @@ AdaptiveGenerator.prototype.initializing = function initializing() {
  */
 AdaptiveGenerator.prototype.prompting = function prompting() {
 
-    // Check if the application_name is defined
-    if (typeof this.arg1 == 'undefined' || typeof this.arg2 == 'undefined' || typeof this.arg3 == 'undefined' || typeof this.arg4 == 'undefined' || typeof this.arg5 == 'undefined') {
+    var argsLength = this.args.length;
+
+    if (argsLength === 0) {
+
+        // Interactive mode
+
         var done = this.async();
         this.prompt([{
             type: 'input',
@@ -177,12 +190,22 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
 
         }.bind(this));
 
-    } else {
+    } else if (argsLength === numberOfParams) {
+
+        // Passing all the parameters
+
         param_app_name = this.arg1;
         param_adaptive_version = this.arg2;
         param_typescript = JSON.parse(this.arg3);
         param_boilerplate = this.arg4;
         param_platforms = (this.arg5 + '').split(',');
+
+    } else {
+
+        // number of parameters incorrect
+
+        this.log(chalk.red('[generator-adaptive] The number of parameters [' + argsLength + '] is not the expected [' + numberOfParams + ']'));
+        exit(-1);
     }
 };
 
@@ -211,16 +234,13 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
     this.template('_README.md', 'README.md', this, {});
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
+    this.copy('bowerrc', '.bowerrc');
 
     this.fs.copyTpl(
         this.templatePath('Gruntfile.js'),
         this.destinationPath('Gruntfile.js'),
         {typescript: param_typescript}
     );
-
-    // script for installing nibble globally
-    this.mkdir('bin/');
-    this.copy('bin/nibble-installer.js', 'bin/nibble-installer.js');
 };
 
 /**
@@ -240,32 +260,21 @@ AdaptiveGenerator.prototype.writing = function writing() {
     var distDir = 'dist/';
     var assetsDir = 'assets/';
 
-    var defDir = 'definitions/';
-    var valDir = 'validators/';
-
     var cssDir = 'css/';
     var jsDir = 'js/';
     var fontsDir = 'fonts/';
 
     this.log(chalk.green('[generator-adaptive] Copying application folders and files...'));
 
-    this.mkdir(cfgDir);
-    this.mkdir(cfgDir + defDir);
-    this.mkdir(cfgDir + valDir);
+    mkdirp(cfgDir);
+    mkdirp(srcDir);
+    mkdirp(distDir);
+    mkdirp(assetsDir);
 
-    this.template(cfgDir + defDir + 'i18n-config.xsd', cfgDir + defDir + 'i18n-config.xsd', this, {});
-    this.template(cfgDir + defDir + 'io-config.xsd', cfgDir + defDir + 'io-config.xsd', this, {});
-    this.template(cfgDir + valDir + 'csslintrc', cfgDir + valDir + '.csslintrc', this, {});
-    this.template(cfgDir + valDir + 'jshintrc', cfgDir + valDir + '.jshintrc', this, {});
-    this.template(cfgDir + 'en-EN.plist', cfgDir + 'en-EN.plist', this, {});
-    this.template(cfgDir + 'i18n-config.xml', cfgDir + 'i18n-config.xml', this, {});
-    this.template(cfgDir + 'io-config.xml', cfgDir + 'io-config.xml', this, {});
-
-    this.mkdir(srcDir);
-    this.mkdir(distDir);
+    // configs
+    this.directory(cfgDir, cfgDir, true);
 
     // assets
-    this.mkdir(assetsDir);
     for (var i = 0; i < param_platforms.length; i++) {
         var dir = assetsDir + param_platforms[i] + path.sep;
         this.directory(dir, dir, true);
@@ -290,8 +299,8 @@ AdaptiveGenerator.prototype.writing = function writing() {
                 {app_name: param_app_name, adaptive_version: param_adaptive_version}
             );
 
-            this.mkdir(srcDir + cssDir);
-            this.mkdir(srcDir + jsDir);
+            mkdirp(srcDir + cssDir);
+            mkdirp(srcDir + jsDir);
 
             this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
             if (param_typescript) {
@@ -317,8 +326,8 @@ AdaptiveGenerator.prototype.writing = function writing() {
                 {app_name: param_app_name, adaptive_version: param_adaptive_version}
             );
 
-            this.mkdir(srcDir + cssDir);
-            this.mkdir(srcDir + jsDir);
+            mkdirp(srcDir + cssDir);
+            mkdirp(srcDir + jsDir);
 
             this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
             this.template(srcDir + boilerplateSrc + 'LICENSE.md', srcDir + 'LICENSE.md', this, {});
@@ -347,8 +356,8 @@ AdaptiveGenerator.prototype.writing = function writing() {
                 {app_name: param_app_name, adaptive_version: param_adaptive_version}
             );
 
-            this.mkdir(srcDir + cssDir);
-            this.mkdir(srcDir + jsDir);
+            mkdirp(srcDir + cssDir);
+            mkdirp(srcDir + jsDir);
 
             this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
             if (param_typescript) {
@@ -375,9 +384,9 @@ AdaptiveGenerator.prototype.writing = function writing() {
                 {app_name: param_app_name, adaptive_version: param_adaptive_version}
             );
 
-            this.mkdir(srcDir + cssDir);
-            this.mkdir(srcDir + jsDir);
-            this.mkdir(srcDir + fontsDir);
+            mkdirp(srcDir + cssDir);
+            mkdirp(srcDir + jsDir);
+            mkdirp(srcDir + fontsDir);
 
             this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
             if (param_typescript) {
@@ -408,8 +417,8 @@ AdaptiveGenerator.prototype.writing = function writing() {
                 {app_name: param_app_name, adaptive_version: param_adaptive_version}
             );
 
-            this.mkdir(srcDir + cssDir);
-            this.mkdir(srcDir + jsDir);
+            mkdirp(srcDir + cssDir);
+            mkdirp(srcDir + jsDir);
 
             this.template(srcDir + boilerplateSrc + 'index.html', srcDir + 'index.html', this, {});
             if (param_typescript) {
@@ -444,7 +453,6 @@ AdaptiveGenerator.prototype.install = function installation() {
 AdaptiveGenerator.prototype.end = function end() {
 
     if (install && server) {
-        // Execute grunt task
         this.spawnCommand('grunt', ['test', 'nibble']);
     }
 };

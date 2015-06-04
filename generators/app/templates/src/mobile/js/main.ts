@@ -29,7 +29,7 @@
  * =====================================================================================================================
  */
 
-/// <reference path="../../bower_components/adaptiveme/adaptive.d.ts" />
+/// <reference path="../bower_components/adaptiveme/adaptive.d.ts" />
 
 function init():void {
 
