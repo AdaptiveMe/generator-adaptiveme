@@ -45,7 +45,7 @@ var yeoman = require('yeoman-generator'),
 
 // Options default
 var install = true;
-var server = true;
+var start_nibble = false;
 
 // Parameters default
 var param_app_name = '';
@@ -95,7 +95,7 @@ function AdaptiveGenerator(args, options, config) {
 
     // options
     this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
-    this.option('skip-server', {type: Boolean, desc: 'Skip starting the http server', defaults: false});
+    this.option('start-nibble', {type: Boolean, desc: 'Start the nibble emulator at the end of the generation. The nibble should be installed globally.', defaults: false});
 
 }
 
@@ -111,8 +111,8 @@ AdaptiveGenerator.prototype.initializing = function initializing() {
     if (this.options['skip-install']) {
         install = false;
     }
-    if (this.options['skip-server']) {
-        server = false;
+    if (this.options['start-nibble']) {
+        start_nibble = true;
     }
 };
 
@@ -452,7 +452,7 @@ AdaptiveGenerator.prototype.install = function installation() {
  */
 AdaptiveGenerator.prototype.end = function end() {
 
-    if (install && server) {
+    if (install && start_nibble) {
         this.spawnCommand('grunt', ['test', 'nibble']);
     }
 };
