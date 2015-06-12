@@ -105,6 +105,9 @@ module.exports = function (grunt) {
       },
       config: {
         files: [{expand: true, cwd: 'config', src: ['*.xml', '*.plist'], dest: 'dist/config'}]
+      },
+      config_file: {
+        files: [{expand: true, cwd: '', src: 'adaptive.yml', dest: 'dist'}]
       }
     },
 
@@ -149,7 +152,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', ['connect:livereload', 'open', 'watch']);
   grunt.registerTask('nibble', 'exec:nibble');
   grunt.registerTask('build', ['test', 'clean:dist', 'useminPrepare', 'concat:generated', 'cssmin:generated',
-    'uglify:generated', 'copy:release', 'replace:html', 'copy:config', 'filerev', 'usemin', 'htmlmin']);
+    'uglify:generated', 'copy:release', 'replace:html', 'copy:config', 'copy:config_file', 'filerev', 'usemin', 'htmlmin']);
 
   // alias tasks
   grunt.registerTask('dist', ['build']);
