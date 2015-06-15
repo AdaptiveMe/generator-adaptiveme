@@ -58,6 +58,14 @@ To create an application you shoul create a working folder where the generate wi
 
 * Please report issues/wants/needs [here](https://github.com/AdaptiveMe/generator-adaptiveme/issues) clearly stating your platform and screenshots (whenever possible).
 
+#### Non-interactive mode
+
+For running the generator without the interactive mode you could run it with a single command. You should have previous knoledge of the generator. Here's an example:
+
+  ```
+  yo adaptiveme test latest false "Initializr Bootstrap" "ios,android" --ios-version=8.1 --android-version=5.1
+  ```
+
 ### Updating
 * Updating your **generator-adaptiveme** installation.
 

@@ -52,7 +52,9 @@ var param_app_name = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
-var param_platforms = ['ios', 'android', 'windows'];
+var param_platforms = ['ios', 'android'];
+var param_ios_version = '8.3';
+var param_android_version = '5.1';
 var numberOfParams = 5;
 
 // Boilerplate options
@@ -62,10 +64,18 @@ var responsive = 'Initializr Responsive';
 var boostrap = 'Initializr Boostrap';
 
 // Platform options
-var platforms = {};
-platforms[0] = 'ios';
-platforms[1] = 'android';
-platforms[2] = 'windows';
+var platforms = ['ios', 'android'];
+var ios_versions = ['8.1', '8.2', '8.3'];
+var android_versions = ['5.0', '5.1'];
+
+/*var client = github.client();
+ var ghrepo = client.repo('AdaptiveMe/adaptive-arp-api');
+
+ ghrepo.tags(function(err, data, headers) {
+ console.log(chalk.red('[generator-adaptive] ' + data[0].name));
+ param_adaptive_version=data[0].name;
+
+ });*/
 
 module.exports = AdaptiveGenerator;
 
@@ -73,6 +83,9 @@ module.exports = AdaptiveGenerator;
  * Adaptive app generator constructor. Read attributes, options, etc...
  */
 function AdaptiveGenerator(args, options, config) {
+
+    console.log(chalk.red(args));
+    console.log(chalk.red(JSON.stringify(arguments)));
 
     yeoman.generators.Base.apply(this, arguments);
 
@@ -90,12 +103,20 @@ function AdaptiveGenerator(args, options, config) {
         type: String, required: false, optional: true, desc: 'Boilerplate for initialize application'
     });
     this.argument('arg5', {
-        type: Array, required: false, optional: true, desc: 'Array of platforms selected'
+        type: Array, required: false, optional: true, desc: 'Array of platforms selected. ex: [ios,android]'
     });
+    /*this.argument('arg6', {
+     type: String, required: false, optional: true, desc: 'iOS version selected. ex: 8.1'
+     });
+     this.argument('arg7', {
+     type: String, required: false, optional: true, desc: 'Android version selected. ex: 5.0'
+     });*/
 
     // options
     this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
     this.option('start-nibble', {type: Boolean, desc: 'Start the nibble emulator at the end of the generation. The nibble should be installed globally.', defaults: false});
+    this.option('ios-version', {type: String, desc: 'iOS version selected. ex: 8.1', defaults: false});
+    this.option('android-version', {type: String, desc: 'Android version selected. ex: 5.0', defaults: false});
 
 }
 
@@ -113,6 +134,12 @@ AdaptiveGenerator.prototype.initializing = function initializing() {
     }
     if (this.options['start-nibble']) {
         start_nibble = true;
+    }
+    if (this.options['ios-version']) {
+        param_ios_version = this.options['ios-version'];
+    }
+    if (this.options['android-version']) {
+        param_android_version = this.options['android-version'];
     }
 };
 
@@ -176,8 +203,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
             message: 'Select the supported platforms:',
             choices: [
                 platforms[0],
-                platforms[1],
-                platforms[2]
+                platforms[1]
             ],
             default: param_platforms
         }], function (answers) {
@@ -186,11 +212,71 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
             param_boilerplate = answers.param_boilerplate;
             param_platforms = answers.param_platforms;
 
-            done();
+            if (param_platforms.indexOf('ios') > -1 && param_platforms.indexOf('android') > -1) {
+                this.prompt([{
+                    type: 'list',
+                    name: 'param_ios_version',
+                    message: 'Select the minimum version of ios version:',
+                    choices: [
+                        ios_versions[0],
+                        ios_versions[1],
+                        ios_versions[2]
+                    ],
+                    default: ios_versions[2]
+                }, {
+                    type: 'list',
+                    name: 'param_android_version',
+                    message: 'Select the minimum version of android version:',
+                    choices: [
+                        android_versions[0],
+                        android_versions[1]
+                    ],
+                    default: android_versions[1]
+                }], function (answers) {
+                    param_ios_version = answers.param_ios_version;
+                    param_android_version = answers.param_android_version;
+                    done();
+                }.bind(this));
+
+            } else if (param_platforms.indexOf('ios') > -1) {
+                this.prompt([{
+                    type: 'list',
+                    name: 'param_ios_version',
+                    message: 'Select the minimum version of ios version:',
+                    choices: [
+                        ios_versions[0],
+                        ios_versions[1],
+                        ios_versions[2]
+                    ],
+                    default: ios_versions[2]
+                }], function (answers) {
+                    param_ios_version = answers.param_ios_version;
+                    done();
+                }.bind(this));
+
+            } else if (param_platforms.indexOf('android') > -1) {
+                this.prompt([{
+                    type: 'list',
+                    name: 'param_android_version',
+                    message: 'Select the minimum version of android version:',
+                    choices: [
+                        android_versions[0],
+                        android_versions[1]
+                    ],
+                    default: android_versions[1]
+                }], function (answers) {
+                    param_android_version = answers.param_android_version;
+                    done();
+                }.bind(this));
+
+            } else {
+                done();
+            }
 
         }.bind(this));
 
-    } else if (argsLength === numberOfParams) {
+
+    } else if (argsLength >= numberOfParams) {
 
         // Passing all the parameters
 
@@ -204,7 +290,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
 
         // number of parameters incorrect
 
-        this.log(chalk.red('[generator-adaptive] The number of parameters [' + argsLength + '] is not the expected [' + numberOfParams + ']'));
+        this.log(chalk.red('[generator-adaptive] The number of parameters [' + argsLength + '] is not the expected [>=' + numberOfParams + ']'));
         exit(-1);
     }
 };
@@ -215,6 +301,10 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
  */
 AdaptiveGenerator.prototype.configuring = function configuring() {
 
+    // Adaptive version
+    /*if (param_adaptive_version === 'latest') {
+     }*/
+
     this.log(chalk.green('[generator-adaptive] Saving configurations and configure the project...'));
 
     // Adaptive Configuration File
@@ -224,9 +314,10 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
         {
             app_name: param_app_name,
             adaptive_version: param_adaptive_version,
-            target_ios: param_platforms.indexOf('ios') > -1 ? 'true' : 'false',
-            target_android: param_platforms.indexOf('android') > -1 ? 'true' : 'false',
-            target_windows: param_platforms.indexOf('windows') > -1 ? 'true' : 'false'
+            target_ios: param_platforms.indexOf('ios') > -1,
+            version_ios: param_ios_version,
+            target_android: param_platforms.indexOf('android') > -1,
+            version_android: param_android_version
         }
     );
 
