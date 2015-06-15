@@ -64,18 +64,18 @@ var responsive = 'Initializr Responsive';
 var boostrap = 'Initializr Boostrap';
 
 // Platform options
-var platforms = ['ios','android'];
+var platforms = ['ios', 'android'];
 var ios_versions = ['8.1', '8.2', '8.3'];
 var android_versions = ['5.0', '5.1'];
 
 /*var client = github.client();
-var ghrepo = client.repo('AdaptiveMe/adaptive-arp-api');
+ var ghrepo = client.repo('AdaptiveMe/adaptive-arp-api');
 
-ghrepo.tags(function(err, data, headers) {
-    console.log(chalk.red('[generator-adaptive] ' + data[0].name));
-    param_adaptive_version=data[0].name;
+ ghrepo.tags(function(err, data, headers) {
+ console.log(chalk.red('[generator-adaptive] ' + data[0].name));
+ param_adaptive_version=data[0].name;
 
-});*/
+ });*/
 
 module.exports = AdaptiveGenerator;
 
@@ -106,11 +106,11 @@ function AdaptiveGenerator(args, options, config) {
         type: Array, required: false, optional: true, desc: 'Array of platforms selected. ex: [ios,android]'
     });
     /*this.argument('arg6', {
-        type: String, required: false, optional: true, desc: 'iOS version selected. ex: 8.1'
-    });
-    this.argument('arg7', {
-        type: String, required: false, optional: true, desc: 'Android version selected. ex: 5.0'
-    });*/
+     type: String, required: false, optional: true, desc: 'iOS version selected. ex: 8.1'
+     });
+     this.argument('arg7', {
+     type: String, required: false, optional: true, desc: 'Android version selected. ex: 5.0'
+     });*/
 
     // options
     this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
@@ -223,7 +223,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
                         ios_versions[2]
                     ],
                     default: ios_versions[2]
-                },{
+                }, {
                     type: 'list',
                     name: 'param_android_version',
                     message: 'Select the minimum version of android version:',
@@ -303,7 +303,7 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
 
     // Adaptive version
     /*if (param_adaptive_version === 'latest') {
-    }*/
+     }*/
 
     this.log(chalk.green('[generator-adaptive] Saving configurations and configure the project...'));
 
