@@ -1,7 +1,7 @@
 {
   "name": "<%= appname %>",
   "title": "<%= appname %>",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Description for <%= appname %>",
   "dependencies": {
     "npm-adaptiveme-nibble": "2.0.x"
