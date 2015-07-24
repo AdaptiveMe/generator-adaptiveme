@@ -1,6 +1,6 @@
 {
   "name": "generator-adaptiveme",
-  "version": "2.0.96",
+  "version": "2.0.97",
   "description": "Adaptive.me app generator - Yeoman Generator for Adaptive Runtime Platform.",
   "scripts": {
     "test": "grunt"
@@ -27,47 +27,26 @@
   "bugs": {
     "url": "https://github.com/AdaptiveMe/generator-adaptiveme/issues"
   },
-  "homepage": "http://adaptive.cat",
+  "homepage": "http://adaptive.me",
   "engines": {
     "node": ">=0.12",
-    "npm": ">=2.7.4"
+    "npm": ">=2.5.1"
   },
   "dependencies": {
-    "chalk": "1.0.x",
-    "connect-livereload": "0.5.x",
-    "exit": "0.1.x",
-    "grunt": "0.4.x",
-    "grunt-bump": "0.3.x",
-    "grunt-cli": "0.1.x",
-    "grunt-contrib-clean": "0.6.x",
-    "grunt-contrib-concat": "0.5.x",
-    "grunt-contrib-connect": "0.9.x",
-    "grunt-contrib-copy": "0.7.x",
-    "grunt-contrib-csslint": "0.4.x",
-    "grunt-contrib-cssmin": "0.12.x",
-    "grunt-contrib-htmlmin": "0.4.x",
-    "grunt-contrib-jshint": "0.11.x",
-    "grunt-contrib-uglify": "0.7.x",
-    "grunt-contrib-watch": "0.6.x",
-    "grunt-eslint": "10.0.x",
-    "grunt-exec": "0.4.x",
-    "grunt-filerev": "2.3.x",
-    "grunt-jscs": "1.8.x",
-    "grunt-mocha-test": "0.12.x",
-    "grunt-open": "0.2.x",
-    "grunt-release": "0.12.x",
-    "grunt-text-replace": "0.4.x",
-    "grunt-typescript": "0.6.x",
-    "grunt-usemin": "3.0.x",
-    "load-grunt-tasks": "3.1.x",
-    "mkdirp": "0.5.x",
-    "mocha": "2.2.x",
-    "octonode": "0.6.x",
-    "package-script": "0.0.x",
-    "time-grunt": "1.2.x",
-    "typescript": "1.4.x",
-    "yeoman-generator": "0.19.x",
-    "yosay": "1.0.x"
+    "chalk": "^1.1.0",
+    "exit": "^0.1.2",
+    "grunt": "^0.4.5",
+    "grunt-bump": "^0.3.1",
+    "grunt-release": "^0.13.0",
+    "mkdirp": "^0.5.1",
+    "yeoman-generator": "^0.20.2"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "grunt-eslint": "^16.0.0",
+    "grunt-jscs": "^1.8.0",
+    "grunt-mocha-test": "^0.12.7",
+    "load-grunt-tasks": "^3.2.0",
+    "mocha": "^2.2.5",
+    "time-grunt": "^1.2.1"
+  }
 }
