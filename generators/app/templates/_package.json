@@ -1,8 +1,8 @@
 {
-  "name": "<%= appname %>",
-  "title": "<%= appname %>",
+  "name": "<%= app_name %>",
+  "title": "<%= app_name %>",
   "version": "0.0.1",
-  "description": "Description for <%= appname %>",
+  "description": "Description for <%= app_name %>",
   "license": "Apache-2.0",
   "repository": {
     "type": "",

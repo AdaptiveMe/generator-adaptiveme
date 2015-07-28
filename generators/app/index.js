@@ -324,7 +324,13 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
         }
     );
 
-    this.template('_package.json', 'package.json', this, {});
+    this.fs.copyTpl(
+        this.templatePath('_package.json'),
+        this.destinationPath('package.json'),
+        {app_name: param_app_name}
+    );
+
+    //this.template('_package.json', 'package.json', this, {});
     this.template('_README.md', 'README.md', this, {});
     this.copy('gitignore', '.gitignore');
     this.copy('gitattributes', '.gitattributes');
