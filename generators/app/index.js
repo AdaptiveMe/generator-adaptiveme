@@ -41,7 +41,8 @@ var yeoman = require('yeoman-generator'),
     chalk = require('chalk'),
     util = require('util'),
     path = require('path'),
-    mkdirp = require('mkdirp');
+    mkdirp = require('mkdirp'),
+    request = require('sync-request');
 
 // Options default
 var install = true;
@@ -52,9 +53,9 @@ var param_app_name = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
-var param_platforms = ['ios', 'android'];
-var param_ios_version = '8.3';
-var param_android_version = '5.1';
+var param_platforms;
+var param_ios_version;
+var param_android_version;
 var numberOfParams = 5;
 
 // Boilerplate options
@@ -64,18 +65,7 @@ var responsive = 'Initializr Responsive';
 var boostrap = 'Initializr Boostrap';
 
 // Platform options
-var platforms = ['ios', 'android'];
-var ios_versions = ['8.1', '8.2', '8.3'];
-var android_versions = ['5.0', '5.1'];
-
-/*var client = github.client();
- var ghrepo = client.repo('AdaptiveMe/adaptive-arp-api');
-
- ghrepo.tags(function(err, data, headers) {
- console.log(chalk.red('[generator-adaptive] ' + data[0].name));
- param_adaptive_version=data[0].name;
-
- });*/
+var platforms = [];
 
 module.exports = AdaptiveGenerator;
 
@@ -83,9 +73,6 @@ module.exports = AdaptiveGenerator;
  * Adaptive app generator constructor. Read attributes, options, etc...
  */
 function AdaptiveGenerator(args, options, config) {
-
-    console.log(chalk.red(args));
-    console.log(chalk.red(JSON.stringify(arguments)));
 
     yeoman.generators.Base.apply(this, arguments);
 
@@ -105,12 +92,6 @@ function AdaptiveGenerator(args, options, config) {
     this.argument('arg5', {
         type: Array, required: false, optional: true, desc: 'Array of platforms selected. ex: [ios,android]'
     });
-    /*this.argument('arg6', {
-     type: String, required: false, optional: true, desc: 'iOS version selected. ex: 8.1'
-     });
-     this.argument('arg7', {
-     type: String, required: false, optional: true, desc: 'Android version selected. ex: 5.0'
-     });*/
 
     // options
     this.option('skip-install', {type: Boolean, desc: 'Skip dependencies installation', defaults: false});
@@ -118,6 +99,40 @@ function AdaptiveGenerator(args, options, config) {
     this.option('ios-version', {type: String, desc: 'iOS version selected. ex: 8.1', defaults: false});
     this.option('android-version', {type: String, desc: 'Android version selected. ex: 5.0', defaults: false});
 
+    // Adaptive Infrastructure Services calls
+
+    var res = request('GET', 'http://infra1.adaptive.me/adaptive-services-infrastructure/api/platforms', {
+        headers: {
+            apiKey: 'fs9a08d7gdfy89ogsv8u0zfjpasi9f0p9'
+        }
+    });
+
+    JSON.parse(res.getBody()).forEach(function (element, index, array) {
+
+        // MARK: for the moment... only mobile
+        if (element.name === 'mobile') {
+
+            element.operatingSystems.forEach(function (element, index, array) {
+
+                var versions = [];
+
+                element.namespaces.forEach(function (element, index, array) {
+
+                    if (element.name === 'adaptive') {
+                        element.images.forEach(function (element, index, array) {
+                            element.versions.forEach(function (element, index, array) {
+                                element.versions.forEach(function (element, index, array) {
+                                    versions.push(element);
+                                });
+                            });
+                        });
+                    }
+                });
+
+                platforms[element.name] = versions;
+            });
+        }
+    });
 }
 
 util.inherits(AdaptiveGenerator, yeoman.generators.Base);
@@ -201,11 +216,9 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
             type: 'checkbox',
             name: 'param_platforms',
             message: 'Select the supported platforms:',
-            choices: [
-                platforms[0],
-                platforms[1]
-            ],
-            default: param_platforms
+            choices: function () {
+                return Object.keys(platforms);
+            }
         }], function (answers) {
 
             param_typescript = JSON.parse(answers.param_typescript);
@@ -217,21 +230,16 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
                     type: 'list',
                     name: 'param_ios_version',
                     message: 'Select the minimum version of ios version:',
-                    choices: [
-                        ios_versions[0],
-                        ios_versions[1],
-                        ios_versions[2]
-                    ],
-                    default: ios_versions[2]
+                    choices: function () {
+                        return platforms.ios;
+                    }
                 }, {
                     type: 'list',
                     name: 'param_android_version',
                     message: 'Select the minimum version of android version:',
-                    choices: [
-                        android_versions[0],
-                        android_versions[1]
-                    ],
-                    default: android_versions[1]
+                    choices: function () {
+                        return platforms.android;
+                    }
                 }], function (answers) {
                     param_ios_version = answers.param_ios_version;
                     param_android_version = answers.param_android_version;
@@ -243,12 +251,9 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
                     type: 'list',
                     name: 'param_ios_version',
                     message: 'Select the minimum version of ios version:',
-                    choices: [
-                        ios_versions[0],
-                        ios_versions[1],
-                        ios_versions[2]
-                    ],
-                    default: ios_versions[2]
+                    choices: function () {
+                        return platforms.ios;
+                    }
                 }], function (answers) {
                     param_ios_version = answers.param_ios_version;
                     done();
@@ -259,11 +264,9 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
                     type: 'list',
                     name: 'param_android_version',
                     message: 'Select the minimum version of android version:',
-                    choices: [
-                        android_versions[0],
-                        android_versions[1]
-                    ],
-                    default: android_versions[1]
+                    choices: function () {
+                        return platforms.android;
+                    }
                 }], function (answers) {
                     param_android_version = answers.param_android_version;
                     done();

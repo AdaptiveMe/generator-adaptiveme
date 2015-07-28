@@ -1,14 +1,10 @@
 app:
   name: <%= app_name %>
   version: 0.0.1
-
 adaptive:
   version: <%= adaptive_version %>
-<% if(target_ios) { %>
-  ios:
-    version: <%= version_ios %>
-<% } %>
-<% if(target_android) { %>
-  android:
+<% if(target_ios) { %>  ios:
+    version: <%= version_ios %><% } %>
+<% if(target_android) { %>  android:
     version: <%= version_android %>
 <% } %>
