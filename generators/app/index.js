@@ -402,6 +402,7 @@ AdaptiveGenerator.prototype.writing = function writing() {
 
     // TODO: remove copy file-to-file and use this.directory(dir, dir, true); instead
     // TODO: simplify all the following code
+    // TODO: change all the simples copy with this.copy
 
     var boilerplateSrc = '';
 
@@ -516,11 +517,19 @@ AdaptiveGenerator.prototype.writing = function writing() {
             }
             this.template(srcDir + boilerplateSrc + cssDir + 'main.css', srcDir + cssDir + 'main.css', this, {});
 
-            this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.eot', srcDir + fontsDir + 'glyphicons-halflings-regular.eot', this, {});
+            /*this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.eot', srcDir + fontsDir + 'glyphicons-halflings-regular.eot', this, {});
             this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.svg', srcDir + fontsDir + 'glyphicons-halflings-regular.svg', this, {});
             this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.ttf', srcDir + fontsDir + 'glyphicons-halflings-regular.ttf', this, {});
-            this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.woff', srcDir + fontsDir + 'glyphicons-halflings-regular.woff', this, {});
+            this.template(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.woff', srcDir + fontsDir + 'glyphicons-halflings-regular.woff', this, {});*/
 
+            this.copy(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.eot',
+                srcDir + fontsDir + 'glyphicons-halflings-regular.eot');
+            this.copy(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.svg',
+                srcDir + fontsDir + 'glyphicons-halflings-regular.svg');
+            this.copy(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.woff',
+                srcDir + fontsDir + 'glyphicons-halflings-regular.woff');
+            this.copy(srcDir + boilerplateSrc + fontsDir + 'glyphicons-halflings-regular.ttf',
+                srcDir + fontsDir + 'glyphicons-halflings-regular.ttf');
             break;
 
         default:
