@@ -188,6 +188,16 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
             validate: function (input) {
                 if (/^v([0-9]+)\.([0-9]+)\.([0-9]+)(?:-([0-9A-Za-z-]+(?:\.[0-9A-Za-z-]+)*))?(?:\+[0-9A-Za-z-]+)?$/.test(input) || input === 'latest') {
                     param_adaptive_version = input;
+
+                    if (param_adaptive_version === 'latest') {
+                        var res = request('GET', 'https://api.github.com/repos/AdaptiveMe/adaptive-arp-api/tags', {
+                            headers: {
+                                'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+                            }
+                        });
+                        param_adaptive_version = JSON.parse(res.getBody())[0].name;
+                    }
+
                     return true;
                 } else {
                     return 'The version of the library has to follow the Semantic Versioning (http://semver.org/) ';
@@ -285,6 +295,16 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
 
         param_app_name = this.arg1;
         param_adaptive_version = this.arg2;
+
+        if (param_adaptive_version === 'latest') {
+            var res = request('GET', 'https://api.github.com/repos/AdaptiveMe/adaptive-arp-api/tags', {
+                headers: {
+                    'user-agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36'
+                }
+            });
+            param_adaptive_version = JSON.parse(res.getBody())[0].name;
+        }
+
         param_typescript = JSON.parse(this.arg3);
         param_boilerplate = this.arg4;
         param_platforms = (this.arg5 + '').split(',');
