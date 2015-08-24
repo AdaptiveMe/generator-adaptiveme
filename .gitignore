@@ -1,15 +1,3 @@
 node_modules/
 .idea
-.bowerrc
-.gitignore
-.npmignore
-.travis.yml
-.git
-.jscsrc
-.eslintignore
-.editorconfig
-.eslintrc
-.DS_Store
 .npmrc
-bower.json
-npm-debug.log
