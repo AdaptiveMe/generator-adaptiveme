@@ -50,13 +50,14 @@ var start_nibble = false;
 
 // Parameters default
 var param_app_name = '';
+var param_app_id = '';
 var param_adaptive_version = 'latest';
 var param_typescript = false;
 var param_boilerplate = 0; // HTML5 Boilerplate
 var param_platforms;
 var param_ios_version;
 var param_android_version;
-var numberOfParams = 5;
+var numberOfParams = 6;
 
 // Boilerplate options
 var html5 = 'HTML5 Boilerplate';
@@ -91,6 +92,9 @@ function AdaptiveGenerator(args, options, config) {
     });
     this.argument('arg5', {
         type: Array, required: false, optional: true, desc: 'Array of platforms selected. ex: [ios,android]'
+    });
+    this.argument('arg6', {
+        type: String, required: false, optional: true, desc: 'Application Identifier. ex: me.adaptive.arp'
     });
 
     // options
@@ -229,6 +233,18 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
             choices: function () {
                 return Object.keys(platforms);
             }
+        }, {
+            type: 'input',
+            name: 'param_app_id',
+            validate: function (input) {
+                if (/([a-zA-Z_$][a-zA-Z\d_$]*\.)*[a-zA-Z_$][a-zA-Z\d_$]*/.test(input)) {
+                    param_app_id = input;
+                    return true;
+                }
+                return 'Your application id has to be a valid package identifier. {} cannot contain special characters or a blank space';
+            },
+            message: 'What is the application identifier?',
+            default: param_app_id
         }], function (answers) {
 
             param_typescript = JSON.parse(answers.param_typescript);
@@ -308,6 +324,7 @@ AdaptiveGenerator.prototype.prompting = function prompting() {
         param_typescript = JSON.parse(this.arg3);
         param_boilerplate = this.arg4;
         param_platforms = (this.arg5 + '').split(',');
+        param_app_id = this.arg6;
 
     } else {
 
@@ -340,7 +357,8 @@ AdaptiveGenerator.prototype.configuring = function configuring() {
             target_ios: param_platforms.indexOf('ios') > -1,
             version_ios: param_ios_version,
             target_android: param_platforms.indexOf('android') > -1,
-            version_android: param_android_version
+            version_android: param_android_version,
+            app_id: param_app_id
         }
     );
 

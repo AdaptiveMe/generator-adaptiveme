@@ -1,5 +1,6 @@
 app:
   name: <%= app_name %>
+  id: <%= app_id %>
   version: 0.0.1
 adaptive:
   version: <%= adaptive_version %>

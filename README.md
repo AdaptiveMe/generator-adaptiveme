@@ -50,6 +50,7 @@ To create an application you shoul create a working folder where the generate wi
 		* **ios**
 		* **android**
 		* **windows**
+	* **What is the application identifier?** Application Identifier for online stores
 * Once the generation is finished, you can use some features for development:
 	* ```grunt watch``` This task will open for you a watcher for validating JS and CSS. Also this task opens a watcher for the typescript files.
 	* ```grunt nibble``` Runs a nibble emulator on the source folder in order to emulate your application on a device
@@ -63,7 +64,7 @@ To create an application you shoul create a working folder where the generate wi
 For running the generator without the interactive mode you could run it with a single command. You should have previous knoledge of the generator. Here's an example:
 
   ```
-  yo adaptiveme test latest false "Initializr Bootstrap" "ios,android" --ios-version=8.1 --android-version=5.1
+  yo adaptiveme test latest false "Initializr Bootstrap" "ios,android" me.adaptive.arp --ios-version=8.1 --android-version=5.1 --skip-install
   ```
 
 ### Updating
