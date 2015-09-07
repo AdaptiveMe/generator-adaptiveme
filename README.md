@@ -18,22 +18,24 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 
 ### Installation
 
-* You should NodeJS installed on your machine before proceeding with the installation. If you don't have it, please download it from [here](https://nodejs.org/download/) for your platform. 
-	* If you don't know whether you have it installed, open up a ```terminal```or ```cmd prompt``` and issue the following command ```node -v```.
+* You should NodeJS installed on your machine before proceeding with the installation. If you don't have it, please download it from [here](https://nodejs.org/) for your platform. 
+	* If you don't know whether you have it installed, open up a ```terminal``` and issue the following command ```node -v```.
 	* The above command should respond with at least the following NodeJS version ```v0.12.0```.
 * Install the tools for running the generator and the generator
 
   ```  
-  [sudo] npm install -g yo bower grunt-cli generator-adaptiveme
+  [sudo] npm install -g yo bower grunt grunt-cli npm i npm-adaptiveme-nibble generator-adaptiveme
   ```
 
 * The installer will download everything you need to run Adaptive App Generator.
 	
 ### Running
 
-To create an application you shoul create a working folder where the generate will download all the necessary files for starting the application.
+To create an application you should create a working folder where the generate will download all the necessary files for starting the application.
 
   ```
+  mkdir {app_name}
+  cd {app_name}
   yo adaptiveme
   ```
 
@@ -47,12 +49,10 @@ To create an application you shoul create a working folder where the generate wi
 		* **Initializr Responsive** Responsive Boilerplate for creating multi-device applications (CSS normalization, Modernizr) - http://www.initializr.com/try
 		* **Initializr Boostrap** Boilerplate template for creating applications with boostrap (Boostrap) - http://getbootstrap.com/examples/jumbotron/
 	* **Select the supported platforms:** (multiselect) Select all the platforms for configuring the graphical assets to copy
-		* **ios**
-		* **android**
-		* **windows**
+ 		* **android**
 	* **What is the application identifier?** Application Identifier for online stores
+	* **Select the minimum version of {os_name} version?** Select the minimum version of the {os_name} version
 * Once the generation is finished, you can use some features for development:
-	* ```grunt watch``` This task will open for you a watcher for validating JS and CSS. Also this task opens a watcher for the typescript files.
 	* ```grunt nibble``` Runs a nibble emulator on the source folder in order to emulate your application on a device
 	* ```grunt test``` Execute Javascript and CSS testing for your application
 	* ```grunt dist``` Prepares your application for distribution. The output result will be on **dist** folder
@@ -64,7 +64,7 @@ To create an application you shoul create a working folder where the generate wi
 For running the generator without the interactive mode you could run it with a single command. You should have previous knoledge of the generator. Here's an example:
 
   ```
-  yo adaptiveme test latest false "Initializr Bootstrap" "ios,android" me.adaptive.arp --ios-version=8.1 --android-version=5.1 --skip-install
+  yo adaptiveme test latest false "Initializr Bootstrap" "android" me.adaptive.arp --android-version=5.1 --skip-install
   ```
 
 ### Updating
