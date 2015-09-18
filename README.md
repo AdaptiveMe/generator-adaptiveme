@@ -18,9 +18,13 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 
 ### Installation
 
-* You should NodeJS installed on your machine before proceeding with the installation. If you don't have it, please download it from [here](https://nodejs.org/) for your platform. 
+* You should be a developer and, being a developer, you should have git installed on your machine. If you're either a noob or from the past, please install git on your machine before proceeding: :smile:
+  * For Windows: [download here](http://bfy.tw/1rHG)
+  * For Mac OSX: [download here](http://bfy.tw/1rHJ)
+  * For Linux: [download here](http://bfy.tw/1rHM)
+* You should have NodeJS installed on your machine before proceeding with the installation. If you don't have it, please download it from [here](https://nodejs.org/) for your platform. 
 	* If you don't know whether you have it installed, open up a ```terminal``` and issue the following command ```node -v```.
-	* The above command should respond with at least the following NodeJS version ```v0.12.0```.
+	* The above command should respond with at least the following NodeJS version ```v0.12.0``` or ```v4.0.0```.
 * Install the tools for running the generator and the generator
 
   ```  
