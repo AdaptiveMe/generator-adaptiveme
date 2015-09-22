@@ -29,7 +29,7 @@ Adaptive App Generator is an scaffolding tool for generating HTML5 applications 
 
   ```  
   [sudo] npm install -g yo bower grunt grunt-cli
-  [sudo] npm install npm-adaptiveme-nibble generator-adaptiveme
+  [sudo] npm install -g npm-adaptiveme-nibble generator-adaptiveme
   ```
 
 * The installer will download everything you need to run Adaptive App Generator.
