@@ -97,6 +97,17 @@ module.exports = generators.Base.extend({
    * Saving configurations and configure the project
    */
   configuring: function () {
+
+    this.log('Saving configurations and configure the project...'.green);
+
+    // Adaptive Configuration File
+    this.fs.copyTpl(
+      this.templatePath('_adaptive.yml'),
+      this.destinationPath('adaptive.yml'), {
+        name: this.name,
+        appid: this.appid
+      }
+    );
   },
 
   /**
@@ -104,8 +115,8 @@ module.exports = generators.Base.extend({
    */
   default: function () {
 
-    this.log((this.name).green);
-    this.log((this.appid).green);
+    //this.log((this.name).green);
+    //this.log((this.appid).green);
   },
 
   /**
