@@ -11,11 +11,33 @@
 
 Adaptive App Generator is an scaffolding tool for generating HTML5 applications ready for the Adaptive Runtime Platform.
 
-## Installation
+## Dependencies
 
 ```  
 npm install -g yo bower grunt grunt-cli
+```
+
+## Installation
+
+```  
 npm install -g generator-adaptiveme
+```
+	
+## Help
+
+```
+yo adaptiveme --help
+  
+Usage:
+  yo adaptiveme:app [options]
+
+Options:
+  -h,   --help          # Print the generator's options and usage
+        --skip-cache    # Do not remember prompt answers             Default: false
+        --skip-install  # Do not automatically install dependencies  Default: false
+        --name          # Your project name. ex: myapp
+        --appid         # Application identifier. ex: com.company
+        --boilerplate   # Application boilerplate. ex: bootstrap
 ```
 	
 ## Running (Interactive Mode)
@@ -25,6 +47,7 @@ To create an application you should create a working folder where the generate w
 ```
 mkdir {app_name}
 cd {app_name}
+  
 yo adaptiveme
 ```
   
@@ -41,7 +64,8 @@ For running the generator without the interactive mode you could run it with a s
 ```
 mkdir {app_name}
 cd {app_name}
-yo adaptiveme --name="appname" --appid="com.example"
+  
+yo adaptiveme --name=myapp --appid=com.example --boilerplate=basic --skip-install
 ```
 
 ### About Adaptive Runtime Platform
